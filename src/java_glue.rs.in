@@ -140,7 +140,6 @@ foreign_class!(class TopicProducer {
 });
 
 
-use std::string::FromUtf8Error;
 mod _Record {
     use super::*;
     pub fn value_string(record: &Record) -> Result<String, String> {

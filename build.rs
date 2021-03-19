@@ -17,14 +17,14 @@ fn main() {
         .contains("JNI_VERSION_9");
 
     let java_cfg = JavaConfig::new(
-        Path::new("app")
+        Path::new("lib")
         .join("src")
         .join("main")
         .join("java")
-        .join("net")
         .join("fluvio")
-        .join("myapplication"),
-        "com.infinyon.fluvio".into(),
+        .join("client")
+        .join("java"),
+        "com.fluvio.java".into(),
     )
         .use_null_annotation_from_package("android.support.annotation".into())
         .use_reachability_fence(if have_java_9 {
