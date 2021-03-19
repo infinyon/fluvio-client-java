@@ -24,9 +24,9 @@ fn main() {
         .join("fluvio")
         .join("client")
         .join("java"),
-        "com.fluvio.java".into(),
+        "fluvio.client.java".into(),
     )
-        .use_null_annotation_from_package("android.support.annotation".into())
+        //.use_null_annotation_from_package("android.support.annotation".into())
         .use_reachability_fence(if have_java_9 {
             JavaReachabilityFence::Std
         } else {
