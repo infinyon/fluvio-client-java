@@ -1,9 +1,20 @@
 [package]
-name = "fluvio-client-java"
-version = "0.1.0"
-authors = ["Sebastian Imlay <sebastian.imlay@gmail.com>"]
+name = "fluvio-java"
+version = "0.0.2"
 edition = "2018"
+authors = ["Fluvio Contributors <team@fluvio.io>"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+crate-type = ["cdylib"]
+name = "fluvio_java"
+
+[build-dependencies]
+flapigen = "0.6.0-pre7"
+env_logger = "^0.7"
+bindgen = { version = "0.57.0", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
 [dependencies]
+log = "^0.4.6"
+cpython = { version = "0.5", features = ["extension-module"] }
+fluvio = { version = "0.6" }
+fluvio-future = { version = "0.1.15", features = ["task", "io"] }
