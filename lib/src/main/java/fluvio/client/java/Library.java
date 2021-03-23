@@ -7,7 +7,4 @@ public class Library {
     static {
         System.loadLibrary("fluvio_java");
     }
-    public boolean someLibraryMethod() {
-        return true;
-    }
 }

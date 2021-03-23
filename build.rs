@@ -26,13 +26,13 @@ fn main() {
         .join("java"),
         "fluvio.client.java".into(),
     )
-        //.use_null_annotation_from_package("android.support.annotation".into())
-        .use_reachability_fence(if have_java_9 {
-            JavaReachabilityFence::Std
-        } else {
-            JavaReachabilityFence::GenerateFence(8)
-        }
-        );
+    .use_optional_package("com.hadisatrio.optional".into())
+    .use_reachability_fence(if have_java_9 {
+        JavaReachabilityFence::Std
+    } else {
+        JavaReachabilityFence::GenerateFence(8)
+    });
+    //.use_null_annotation_from_package("android.support.annotation".into())
 
     let in_src = Path::new("src").join("java_glue.rs.in");
     let out_dir = env::var("OUT_DIR").unwrap();
