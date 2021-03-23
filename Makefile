@@ -6,8 +6,7 @@ assemble:
 	gradle assemble
 
 test: assemble
-	#fluvio topic delete simple-send || true
-	#fluvio topic create simple-send || true
+	fluvio topic create simple-send || true
 	gradle cleanTest test
 	fluvio topic delete simple-send || true
 

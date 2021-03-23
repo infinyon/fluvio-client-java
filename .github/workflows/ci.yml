@@ -15,28 +15,28 @@ jobs:
       - uses: styfle/cancel-workflow-action@0.4.1
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
-  check_fmt:
-    name: check formatting
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        rust: [stable]
-        python-version: [3.9]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install ${{ matrix.rust }}
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
-          override: true
-          components: clippy
-      - name: check fmt and flake8
-        run: make lint
+#  check_fmt:
+#    name: check formatting
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#      matrix:
+#        os: [ubuntu-latest, macos-latest]
+#        rust: [stable]
+#        python-version: [3.9]
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Set up Python ${{ matrix.python-version }}
+#        uses: actions/setup-python@v2
+#        with:
+#          python-version: ${{ matrix.python-version }}
+#      - name: Install ${{ matrix.rust }}
+#        uses: actions-rs/toolchain@v1
+#        with:
+#          toolchain: ${{ matrix.rust }}
+#          override: true
+#          components: clippy
+#      - name: check fmt and flake8
+#        run: make lint
   smoke_test:
     name: Smoke test
     runs-on: ${{ matrix.os }}
@@ -44,7 +44,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         rust: [stable]
-        python-version: [3.6, 3.7, 3.8, 3.9]
+		java: [ 1.6, 6.0.83, 7, 7.0.181, 8, 8.0.192, 9.0.x, 10, 11.0.x, 11.0.3, 12, 13 ]
     steps:
       - uses: actions/checkout@v2
       - name: Install ${{ matrix.rust }}
@@ -52,13 +52,14 @@ jobs:
         with:
           toolchain: ${{ matrix.rust }}
           override: true
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+
+      - name: Setup java
+        uses: actions/setup-java@v1
         with:
-          python-version: ${{ matrix.python-version }}
+          java-version: ${{ matrix.java }}
       - name: Build
         run: |
-          make build-dev
+          make assemble
       - name: Install Fluvio Local Cluster
         uses: infinyon/fluvio@master
         with:
