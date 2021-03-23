@@ -159,7 +159,7 @@ foreign_class!(class Record {
     private constructor = empty;
     fn Record::offset(&self) -> i64;
     fn Record::value(&self) -> &[u8];
-    fn Record::key(&self) -> Option<&[u8]>;
+    //fn Record::key(&self) -> Option<&[u8]>;
     fn _Record::value_string(&self) -> Result<String, String>;
     fn _Record::key_string(&self) -> Result<String, String>;
 });

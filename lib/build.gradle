@@ -14,7 +14,6 @@ plugins {
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
-    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -26,12 +25,12 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:29.0-jre'
-    compile 'com.hadisatrio:Optional:v1.0.1'
 }
 
 test {
     systemProperty "java.library.path", file("${buildDir}/libs/shared").absolutePath
 }
+
 // app/build.gradle
 def rustBasePath = ".."
 

@@ -2,11 +2,14 @@
 symbols:
 	nm -gD lib/build/lib/shared/*.so
 
-build:
-	gradle build
+assemble:
+	gradle assemble
 
-test: build
-	gradle test
+test: assemble
+	#fluvio topic delete simple-send || true
+	#fluvio topic create simple-send || true
+	gradle cleanTest test
+	fluvio topic delete simple-send || true
 
 clean:
 	cargo clean

@@ -26,7 +26,7 @@ fn main() {
         .join("java"),
         "fluvio.client.java".into(),
     )
-    .use_optional_package("com.hadisatrio.optional".into())
+    //.use_optional_package("com.hadisatrio.optional".into())
     .use_reachability_fence(if have_java_9 {
         JavaReachabilityFence::Std
     } else {
