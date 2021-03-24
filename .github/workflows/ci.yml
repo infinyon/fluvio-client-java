@@ -20,8 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest]
-        #os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
         rust: [stable]
         java: [8, 11, 15] # Add Java 16 when https://github.com/gradle/gradle/issues/13481 has a better work around.
     steps:
