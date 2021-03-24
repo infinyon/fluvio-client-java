@@ -3,7 +3,7 @@ symbols:
 	nm -gD lib/build/lib/shared/*.so
 
 assemble:
-	gradle assemble
+	gradle assemble --no-daemon
 
 test: assemble
 	fluvio topic create simple-send || true
