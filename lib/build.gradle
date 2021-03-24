@@ -29,6 +29,7 @@ dependencies {
 
 test {
     systemProperty "java.library.path", file("${buildDir}/libs/shared").absolutePath
+    dependsOn cleanTest
 }
 
 // app/build.gradle
