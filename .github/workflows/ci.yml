@@ -38,22 +38,22 @@ jobs:
       - name: Build
         run: |
           make assemble
-      #- name: Install Fluvio Local Cluster
-      #  uses: infinyon/fluvio@master
-      #  with:
-      #    cluster-type: local
-      #    version: latest
-      #- name: Check Fluvio Installation
-      #  run: |
-      #    fluvio version
-      #    fluvio topic list
-      #    fluvio topic create foobar
-      #    sleep 3
-      #    echo foo | fluvio produce foobar
-      #    fluvio consume foobar -o 0 -d
-      #- name: Test
-      #  run: |
-      #    make test
+      - name: Install Fluvio Local Cluster
+        uses: infinyon/fluvio@master
+        with:
+          cluster-type: local
+          #version: latest
+      - name: Check Fluvio Installation
+        run: |
+          fluvio version
+          fluvio topic list
+          fluvio topic create foobar
+          sleep 3
+          echo foo | fluvio produce foobar
+          fluvio consume foobar -o 0 -d
+      - name: Test
+        run: |
+          make test
 #  check_fmt:
 #    name: check formatting
 #    runs-on: ${{ matrix.os }}
