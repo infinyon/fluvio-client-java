@@ -22,7 +22,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         rust: [stable]
-        java: [ 8, 11, 15] # Add Java 16 when https://github.com/gradle/gradle/issues/13481 has a better work around.
+        java: [ 8, 11] #, 15] # Add Java 16 when https://github.com/gradle/gradle/issues/13481 has a better work around.
     steps:
       - uses: actions/checkout@v2
       - name: Install ${{ matrix.rust }}
