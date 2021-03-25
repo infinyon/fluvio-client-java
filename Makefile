@@ -5,7 +5,7 @@ assemble:
 
 test: assemble
 	fluvio topic create simple-send || true
-	FLV_SOCKET_WAIT=600 gradle cleanTest test --no-daemon -i
+	FLV_SOCKET_WAIT=1200 gradle cleanTest test --no-daemon -i
 	fluvio topic delete simple-send || true
 
 clean:
