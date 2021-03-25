@@ -12,7 +12,7 @@ test: assemble
 
 clean:
 	cargo clean
-	gradle clean
+	gradle clean --no-daemon
 
 docs:
 	gradle javadoc
