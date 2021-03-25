@@ -14,9 +14,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class FluvioTest {
-    static {
-        System.loadLibrary("fluvio_java");
-    }
 
     @Test public void testFluvioConnect() throws Exception {
         Fluvio fluvio = Fluvio.connect();

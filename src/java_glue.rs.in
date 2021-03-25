@@ -112,7 +112,7 @@ mod _TopicProducer {
         buffer: &[u8],
         partition: i32,
     ) -> Result<(), String> {
-		run_block_on(producer.send_record(buffer, partition)).map_err(fluvio_error_to_string)
+        run_block_on(producer.send_record(buffer, partition)).map_err(fluvio_error_to_string)
     }
     pub fn send(
         producer: &TopicProducer,
@@ -152,6 +152,13 @@ mod _Record {
             Ok(String::new())
         }
     }
+    pub fn key(record: &Record) -> &[u8] {
+        if let Some(record) = record.key() {
+            record
+        } else {
+            &[]
+        }
+    }
 }
 
 foreign_class!(class Record {
@@ -159,7 +166,7 @@ foreign_class!(class Record {
     private constructor = empty;
     fn Record::offset(&self) -> i64;
     fn Record::value(&self) -> &[u8];
-    //fn Record::key(&self) -> Option<&[u8]>;
+    fn _Record::key(&self) -> &[u8];
     fn _Record::value_string(&self) -> Result<String, String>;
     fn _Record::key_string(&self) -> Result<String, String>;
 });

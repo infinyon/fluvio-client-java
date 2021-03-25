@@ -40,26 +40,26 @@ tasks.create(name: "cargo-output-dir", description: "Get cargo metadata") {
     new ByteArrayOutputStream().withStream { os ->
         exec {
             commandLine 'cargo', 'metadata', '--format-version', '1'
-                workingDir rustBasePath
-                standardOutput = os
+            workingDir rustBasePath
+            standardOutput = os
         }
         def outputAsString = os.toString()
-            def json = new groovy.json.JsonSlurper().parseText(outputAsString)
+        def json = new groovy.json.JsonSlurper().parseText(outputAsString)
 
-            logger.info("cargo target directory: ${json.target_directory}")
-            project.ext.cargo_target_directory = json.target_directory
+        logger.info("cargo target directory: ${json.target_directory}")
+        project.ext.cargo_target_directory = json.target_directory
     }
 }
 // Build with cargo
 tasks.create(name: "cargo-build", type: Exec, description: "Running Cargo build", dependsOn: "cargo-output-dir") {
     workingDir rustBasePath
-        commandLine 'cargo', 'build', '--release'
+    commandLine 'cargo', 'build', '--release'
 }
 // Copy build libs into this app's libs directory
 tasks.create(name: "rust-deploy", type: Copy, dependsOn: "cargo-build", description: "Copy rust libs to jniLibs") {
     from "${project.ext.cargo_target_directory}/release"
-        include "*.dylib","*.so"
-        into "${buildDir}/libs/shared/"
+    include "*.dylib","*.so"
+    into "${buildDir}/libs/shared/"
 }
 
 // Hook up tasks to execute before building java
