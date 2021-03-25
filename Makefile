@@ -1,16 +1,16 @@
 .PHONY: assemble test clean docs
 
 assemble:
-	gradle assemble --no-daemon
+	./gradlew assemble --no-daemon
 
 test: assemble
 	fluvio topic create simple-send || true
-	FLV_SOCKET_WAIT=1200 gradle cleanTest test --no-daemon -i
+	FLV_SOCKET_WAIT=1200 ./gradlew cleanTest test --no-daemon -i
 	fluvio topic delete simple-send || true
 
 clean:
 	cargo clean
-	gradle clean --no-daemon
+	./gradlew clean --no-daemon
 
 docs:
-	gradle javadoc
+	./gradlew javadoc
