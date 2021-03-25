@@ -1,16 +1,16 @@
-
-symbols:
-	nm -gD lib/build/lib/shared/*.so
+.PHONY: assemble test clean docs
 
 assemble:
-	gradle assemble
+	./gradlew assemble --no-daemon
 
 test: assemble
-	#fluvio topic delete simple-send || true
-	#fluvio topic create simple-send || true
-	gradle cleanTest test
+	fluvio topic create simple-send || true
+	FLV_SOCKET_WAIT=1200 ./gradlew cleanTest test --no-daemon -i
 	fluvio topic delete simple-send || true
 
 clean:
 	cargo clean
-	gradle clean
+	./gradlew clean --no-daemon
+
+docs:
+	./gradlew javadoc

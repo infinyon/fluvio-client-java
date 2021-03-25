@@ -15,28 +15,6 @@ jobs:
       - uses: styfle/cancel-workflow-action@0.4.1
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
-  check_fmt:
-    name: check formatting
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        rust: [stable]
-        python-version: [3.9]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install ${{ matrix.rust }}
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
-          override: true
-          components: clippy
-      - name: check fmt and flake8
-        run: make lint
   smoke_test:
     name: Smoke test
     runs-on: ${{ matrix.os }}
@@ -44,7 +22,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         rust: [stable]
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        # Add Java 16 when https://github.com/gradle/gradle/issues/13481 has a
+        # better work around.
+        java: [8, 11, 15]
     steps:
       - uses: actions/checkout@v2
       - name: Install ${{ matrix.rust }}
@@ -52,18 +32,18 @@ jobs:
         with:
           toolchain: ${{ matrix.rust }}
           override: true
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+
+      - name: Setup java
+        uses: actions/setup-java@v1
         with:
-          python-version: ${{ matrix.python-version }}
+          java-version: ${{ matrix.java }}
       - name: Build
         run: |
-          make build-dev
+          make assemble
       - name: Install Fluvio Local Cluster
         uses: infinyon/fluvio@master
         with:
           cluster-type: local
-          version: latest
       - name: Check Fluvio Installation
         run: |
           fluvio version
@@ -75,3 +55,10 @@ jobs:
       - name: Test
         run: |
           make test
+      - name: Upload Test Results
+        timeout-minutes: 1
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: gradle-test-results
+          path: /home/runner/work/fluvio-client-java/fluvio-client-java/lib/build/reports/tests/test/

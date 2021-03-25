@@ -29,6 +29,7 @@ dependencies {
 
 test {
     systemProperty "java.library.path", file("${buildDir}/libs/shared").absolutePath
+    dependsOn cleanTest
 }
 
 // app/build.gradle
@@ -54,20 +55,10 @@ tasks.create(name: "cargo-build", type: Exec, description: "Running Cargo build"
     workingDir rustBasePath
         commandLine 'cargo', 'build', '--release'
 }
-/*
-// Sync shared native dependencies
-tasks.create(name: "sync-rust-deps-${arch}", type: Sync, dependsOn: "cargo-build-${arch}") {
-    from "${rustBasePath}/src/${arch}"
-        include "*.so"
-        //into "${buildDir}/src/main/${arch}"
-        into "${buildDir}/libs/shared/"
-}
-*/
 // Copy build libs into this app's libs directory
 tasks.create(name: "rust-deploy", type: Copy, dependsOn: "cargo-build", description: "Copy rust libs to jniLibs") {
     from "${project.ext.cargo_target_directory}/release"
-        include "*.so"
-        //into "src/main/libs/${arch}"
+        include "*.dylib","*.so"
         into "${buildDir}/libs/shared/"
 }
 
@@ -75,7 +66,6 @@ tasks.create(name: "rust-deploy", type: Copy, dependsOn: "cargo-build", descript
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn "rust-deploy"
 }
-//preBuild.dependsOn "rust-deploy-${arch}"
 
 // Hook up clean tasks
 tasks.create(name: "clean-rust", type: Delete, description: "Deleting built libs", dependsOn: "cargo-output-dir") {

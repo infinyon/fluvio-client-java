@@ -24,7 +24,7 @@ fn main() {
         .join("fluvio")
         .join("client")
         .join("java"),
-        "fluvio.client.java".into(),
+        "fluvio.client.java".into(), // TODO: Change to "com.infinyon.fluvio"
     )
     //.use_optional_package("com.hadisatrio.optional".into())
     .use_reachability_fence(if have_java_9 {
