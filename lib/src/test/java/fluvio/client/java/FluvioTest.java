@@ -8,6 +8,7 @@ import fluvio.client.java.TopicProducer;
 import fluvio.client.java.PartitionConsumer;
 import fluvio.client.java.PartitionConsumerStream;
 import fluvio.client.java.Record;
+import fluvio.client.java.Offset;
 import java.util.Date;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -20,9 +21,9 @@ public class FluvioTest {
 
         TopicProducer producer = fluvio.topic_producer(new String("simple-send"));
         PartitionConsumer consumer = fluvio.partition_consumer(new String("simple-send"), 0);
-        PartitionConsumerStream stream = consumer.stream(0);
+        PartitionConsumerStream stream = consumer.stream(Offset.beginning());
 
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 10; i++) {
             LocalDateTime in_date = LocalDateTime.now();
             String message = ("" + in_date);
 
