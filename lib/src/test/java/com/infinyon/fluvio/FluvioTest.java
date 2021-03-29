@@ -1,14 +1,14 @@
 
-package fluvio.client.java;
+package com.infinyon.fluvio;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import fluvio.client.java.Fluvio;
-import fluvio.client.java.TopicProducer;
-import fluvio.client.java.PartitionConsumer;
-import fluvio.client.java.PartitionConsumerStream;
-import fluvio.client.java.Record;
-import fluvio.client.java.Offset;
+import com.infinyon.fluvio.Fluvio;
+import com.infinyon.fluvio.TopicProducer;
+import com.infinyon.fluvio.PartitionConsumer;
+import com.infinyon.fluvio.PartitionConsumerStream;
+import com.infinyon.fluvio.Record;
+import com.infinyon.fluvio.Offset;
 import java.util.Date;
 import java.time.Duration;
 import java.time.LocalDate;

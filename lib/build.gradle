@@ -10,6 +10,8 @@ plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
 }
+group 'com.infinyon'
+version '0.0-SNAPSHOT'
 
 repositories {
     // Use JCenter for resolving dependencies.
