@@ -9,11 +9,20 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'cpp'
+
+    // https://docs.gradle.org/current/userguide/publishing_maven.html
+    id 'maven-publish'
 }
+group 'com.infinyon'
+version '0.0-SNAPSHOT'
 
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
+    flatDir {
+        dirs 'target/release/'
+    }
 }
 
 dependencies {
@@ -25,6 +34,8 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:29.0-jre'
+    implementation files('lib/*.so')
+    //runtime fileTree('libs') { include '*.so' }
 }
 
 test {
@@ -40,26 +51,27 @@ tasks.create(name: "cargo-output-dir", description: "Get cargo metadata") {
     new ByteArrayOutputStream().withStream { os ->
         exec {
             commandLine 'cargo', 'metadata', '--format-version', '1'
-                workingDir rustBasePath
-                standardOutput = os
+            workingDir rustBasePath
+            standardOutput = os
         }
         def outputAsString = os.toString()
-            def json = new groovy.json.JsonSlurper().parseText(outputAsString)
+        def json = new groovy.json.JsonSlurper().parseText(outputAsString)
 
-            logger.info("cargo target directory: ${json.target_directory}")
-            project.ext.cargo_target_directory = json.target_directory
+        logger.info("cargo target directory: ${json.target_directory}")
+        project.ext.cargo_target_directory = json.target_directory
     }
 }
 // Build with cargo
 tasks.create(name: "cargo-build", type: Exec, description: "Running Cargo build", dependsOn: "cargo-output-dir") {
     workingDir rustBasePath
-        commandLine 'cargo', 'build', '--release'
+    commandLine 'cargo', 'build', '--release'
 }
 // Copy build libs into this app's libs directory
 tasks.create(name: "rust-deploy", type: Copy, dependsOn: "cargo-build", description: "Copy rust libs to jniLibs") {
     from "${project.ext.cargo_target_directory}/release"
-        include "*.dylib","*.so"
-        into "${buildDir}/libs/shared/"
+    include "*.dylib","*.so"
+    into "${buildDir}/libs/shared/"
+    //into "./lib/"
 }
 
 // Hook up tasks to execute before building java
@@ -74,3 +86,35 @@ tasks.create(name: "clean-rust", type: Delete, description: "Deleting built libs
     }
 }
 clean.dependsOn "clean-rust"
+
+model {
+    repositories {
+        libs(PrebuiltLibraries) {
+            v8_base {
+                binaries.withType(StaticLibraryBinary) {
+                    staticLibraryFile = file("src/main/java/libs")
+                }
+            }
+        }
+    }
+}
+/*
+*/
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/infinyon/fluvio-client-java")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

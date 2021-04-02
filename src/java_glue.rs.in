@@ -20,10 +20,11 @@ fn fluvio_error_to_string(e: FluvioError) -> String {
     format!("{:?}", e)
 }
 
+#[allow(non_snake_case)]
 mod _Fluvio {
     use super::*;
-    pub fn connect() -> Fluvio {// TODO: Return result type
-        run_block_on(Fluvio::connect()).expect("Failed to connect to fluvio")
+    pub fn connect() -> Result<Fluvio, String> {// TODO: Return result type
+        run_block_on(Fluvio::connect()).map_err(fluvio_error_to_string)
     }
     pub fn partition_consumer(
         fluvio: &Fluvio,
@@ -43,7 +44,7 @@ mod _Fluvio {
 foreign_class!(class Fluvio {
     self_type Fluvio;
     private constructor = empty;
-    fn _Fluvio::connect() -> Fluvio;
+    fn _Fluvio::connect() -> Result<Fluvio, String>;
     fn _Fluvio::partition_consumer(
         &self,
         _: String,
@@ -53,18 +54,25 @@ foreign_class!(class Fluvio {
         &self,
         _: String
     ) -> Result<TopicProducer, String>;
+    // https://github.com/Dushistov/flapigen-rs/issues/253#issuecomment-515672499
+    foreigner_code r#"
+    static {
+        System.loadLibrary("fluvio_java");
+    }
+"#;
 });
 
 
+#[allow(non_snake_case)]
 mod _PartitionConsumer {
     use super::*;
     pub fn stream(
         consumer: &PartitionConsumer,
-        offset: u32,
+        offset: &Offset,
     ) -> Result<PartitionConsumerStream, String> {
         Ok(PartitionConsumerStream {
             inner: Box::pin(run_block_on(
-               consumer.stream(Offset::beginning())
+               consumer.stream(offset.clone())
             ).map_err(fluvio_error_to_string)?)
         })
     }
@@ -73,7 +81,7 @@ foreign_class!(class PartitionConsumer {
     self_type PartitionConsumer;
     private constructor = empty;
     fn _PartitionConsumer::stream(
-        &self, _: u32
+        &self, _: &Offset,
     ) -> Result<PartitionConsumerStream, String>;
 });
 
@@ -105,6 +113,7 @@ foreign_class!(class FluvioError {
     private constructor = empty;
 });
 
+#[allow(non_snake_case)]
 mod _TopicProducer {
     use super::*;
     pub fn send_record(
@@ -112,7 +121,7 @@ mod _TopicProducer {
         buffer: &[u8],
         partition: i32,
     ) -> Result<(), String> {
-		run_block_on(producer.send_record(buffer, partition)).map_err(fluvio_error_to_string)
+        run_block_on(producer.send_record(buffer, partition)).map_err(fluvio_error_to_string)
     }
     pub fn send(
         producer: &TopicProducer,
@@ -138,6 +147,7 @@ foreign_class!(class TopicProducer {
 });
 
 
+#[allow(non_snake_case)]
 mod _Record {
     use super::*;
     pub fn value_string(record: &Record) -> Result<String, String> {
@@ -152,6 +162,13 @@ mod _Record {
             Ok(String::new())
         }
     }
+    pub fn key(record: &Record) -> &[u8] {
+        if let Some(record) = record.key() {
+            record
+        } else {
+            &[]
+        }
+    }
 }
 
 foreign_class!(class Record {
@@ -159,12 +176,28 @@ foreign_class!(class Record {
     private constructor = empty;
     fn Record::offset(&self) -> i64;
     fn Record::value(&self) -> &[u8];
-    //fn Record::key(&self) -> Option<&[u8]>;
+    fn _Record::key(&self) -> &[u8];
     fn _Record::value_string(&self) -> Result<String, String>;
     fn _Record::key_string(&self) -> Result<String, String>;
 });
 
+#[allow(non_snake_case)]
+mod _Offset {
+    use super::*;
+    pub fn absolute(offset: i64) -> Result<Offset, String> {
+        Offset::absolute(offset).map_err(fluvio_error_to_string)
+    }
+}
 
+foreign_class!(class Offset {
+    self_type Offset;
+    private constructor = empty;
+    fn _Offset::absolute(_ :i64) -> Result<Offset, String>;
+    fn Offset::beginning() -> Offset;
+    fn Offset::from_beginning(_: u32) -> Offset;
+    fn Offset::end() -> Offset;
+    fn Offset::from_end(_: u32) -> Offset;
+});
 
 // Not sure how I feel about this but:
 // https://github.com/Dushistov/flapigen-rs/issues/143#issuecomment-664131615

@@ -20,4 +20,5 @@ TODO
 
 # Developer Notes
 
-TODO
+Ensure that `JAVA_ROOT` points to the base directory for the java installation.
+It's under `/usr/lib/jvm/java-15-openjdk` for archlinux.

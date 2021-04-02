@@ -3,10 +3,16 @@
 assemble:
 	./gradlew assemble --no-daemon
 
-test: assemble
+build:
+	./gradlew build -x test
+
+test: build
 	fluvio topic create simple-send || true
 	FLV_SOCKET_WAIT=1200 ./gradlew cleanTest test --no-daemon -i
 	fluvio topic delete simple-send || true
+	fluvio topic create simple-example || true
+	make -C examples/ run
+	fluvio topic delete simple-example || true
 
 clean:
 	cargo clean
