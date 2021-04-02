@@ -54,6 +54,12 @@ foreign_class!(class Fluvio {
         &self,
         _: String
     ) -> Result<TopicProducer, String>;
+    // https://github.com/Dushistov/flapigen-rs/issues/253#issuecomment-515672499
+    foreigner_code r#"
+    static {
+        System.loadLibrary("fluvio_java");
+    }
+"#;
 });
 
 
