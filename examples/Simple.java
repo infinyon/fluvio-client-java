@@ -4,7 +4,6 @@
 //import org.junit.Test;
 //import static org.junit.Assert.*;
 import com.infinyon.fluvio.Fluvio;
-import com.infinyon.fluvio.Library;
 import com.infinyon.fluvio.TopicProducer;
 import com.infinyon.fluvio.PartitionConsumer;
 import com.infinyon.fluvio.PartitionConsumerStream;

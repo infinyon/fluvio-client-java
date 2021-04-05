@@ -52,9 +52,14 @@ jobs:
           sleep 3
           echo foo | fluvio produce foobar
           fluvio consume foobar -o 0 -d
-      - name: Test
+      - name: Run Test
         run: |
           make test
+
+      - name: Run Examples
+        run: |
+          make examples
+
       - name: Upload Test Results
         timeout-minutes: 1
         if: failure()

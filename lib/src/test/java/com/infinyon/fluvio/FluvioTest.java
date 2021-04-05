@@ -38,7 +38,7 @@ public class FluvioTest {
             LocalDateTime parsed_date = LocalDateTime.parse(out);
             Duration duration = Duration.between(parsed_date, out_date);
 
-            System.err.println("This message took " + duration.toNanos());
+            System.err.println("This message took " + duration.toMillis() + "ms");
 
             assertTrue("send_record \"" + message + "\" is equal to \"" + out + "\"", out.equals(message));
         }
