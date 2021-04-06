@@ -13,6 +13,7 @@ plugins {
 
     // https://docs.gradle.org/current/userguide/publishing_maven.html
     id 'maven-publish'
+    id 'maven'
 }
 group 'com.infinyon'
 version '0.0.0-SNAPSHOT'
