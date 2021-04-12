@@ -13,10 +13,11 @@ plugins {
 
     // https://docs.gradle.org/current/userguide/publishing_maven.html
     id 'maven-publish'
-    id 'maven'
+    //id 'maven'
 }
 group 'com.infinyon'
-version '0.0.0-SNAPSHOT'
+version '0.0.0'
+jar.archiveName = "fluvio.jar"
 
 repositories {
     // Use JCenter for resolving dependencies.

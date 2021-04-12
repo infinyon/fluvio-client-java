@@ -27,6 +27,7 @@ public class Simple {
             String message = ("" + in_date);
 
             producer.send_record(message.getBytes(), 0);
+            //Thread.sleep(1000);
             Record record = stream.next();
 
             String out = new String(record.value());
