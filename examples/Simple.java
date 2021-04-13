@@ -20,14 +20,16 @@ public class Simple {
 
         TopicProducer producer = fluvio.topic_producer(new String("simple-example"));
         PartitionConsumer consumer = fluvio.partition_consumer(new String("simple-example"), 0);
+        producer.send_record(new String("").getBytes(), 0);
         PartitionConsumerStream stream = consumer.stream(Offset.beginning());
+        stream.next();
 
         for(int i = 0; i < 100; i++) {
             LocalDateTime in_date = LocalDateTime.now();
             String message = ("" + in_date);
 
             producer.send_record(message.getBytes(), 0);
-            //Thread.sleep(1000);
+            /**/
             Record record = stream.next();
 
             String out = new String(record.value());
@@ -36,6 +38,7 @@ public class Simple {
             Duration duration = Duration.between(parsed_date, out_date);
 
             System.err.println("This message took " + duration.toMillis() + "ms");
+            /**/
         }
     }
 }

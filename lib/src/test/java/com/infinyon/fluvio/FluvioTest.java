@@ -20,17 +20,32 @@ public class FluvioTest {
     }
 
     @Test public void testFluvioConnect() throws Exception {
+        System.err.println("RUNNING UNIT TESTS");
         Fluvio fluvio = Fluvio.connect();
 
-        TopicProducer producer = fluvio.topic_producer(new String("simple-send"));
-        PartitionConsumer consumer = fluvio.partition_consumer(new String("simple-send"), 0);
+        String topic = new String("simple-send");
+        System.err.println("STARTING STREAM ON TOPIC: " + topic);
+
+        TopicProducer producer = fluvio.topic_producer(topic);
+        PartitionConsumer consumer = fluvio.partition_consumer(topic, 0);
+
+        // consumer.stream hangs until there's something in it so we must put
+        // something in it before we create the stream
+        producer.send_record(new String("").getBytes(), 0);
         PartitionConsumerStream stream = consumer.stream(Offset.beginning());
+
+        // We must consume the single record as it'll make all the tests be one
+        // off from what's expected.
+        stream.next();
+        System.err.println("STARTED STREAM ON TOPIC: " + topic);
 
         for(int i = 0; i < 10; i++) {
             LocalDateTime in_date = LocalDateTime.now();
             String message = ("" + in_date);
 
             producer.send_record(message.getBytes(), 0);
+            System.err.println("SEND MESSAGE: " + message);
+
             Record record = stream.next();
 
             String out = new String(record.value());
