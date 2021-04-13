@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'fluvio-client-java'
-include('lib')
+include('fluvio')
