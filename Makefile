@@ -22,3 +22,6 @@ clean:
 
 docs:
 	./gradlew javadoc
+
+publish:
+	./gradlew publish
