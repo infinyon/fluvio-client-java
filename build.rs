@@ -17,7 +17,7 @@ fn main() {
         .contains("JNI_VERSION_9");
 
     let java_cfg = JavaConfig::new(
-        Path::new("lib")
+        Path::new("fluvio")
         .join("src")
         .join("main")
         .join("java")
@@ -47,7 +47,6 @@ fn main() {
 
 fn gen_jni_bindings(jni_c_headers_rs: &Path) {
     let java_home = env::var("JAVA_HOME").expect("JAVA_HOME env variable not settted");
-    //let java_home = "/usr/lib/jvm/java-15-openjdk";
 
     let java_include_dir = Path::new(&java_home).join("include");
 

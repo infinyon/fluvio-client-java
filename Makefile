@@ -13,7 +13,7 @@ test: build
 
 examples: build
 	fluvio topic create simple-example || true
-	make -C examples/ run
+	./gradlew -q run
 	fluvio topic delete simple-example || true
 
 clean:

@@ -1,8 +1,6 @@
 
-//package com.infinyon.fluvio;
+package com.example;
 
-//import org.junit.Test;
-//import static org.junit.Assert.*;
 import com.infinyon.fluvio.Fluvio;
 import com.infinyon.fluvio.TopicProducer;
 import com.infinyon.fluvio.PartitionConsumer;
@@ -29,7 +27,6 @@ public class Simple {
             String message = ("" + in_date);
 
             producer.send_record(message.getBytes(), 0);
-            /**/
             Record record = stream.next();
 
             String out = new String(record.value());
@@ -38,7 +35,6 @@ public class Simple {
             Duration duration = Duration.between(parsed_date, out_date);
 
             System.err.println("This message took " + duration.toMillis() + "ms");
-            /**/
         }
     }
 }
