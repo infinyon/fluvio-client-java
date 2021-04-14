@@ -35,6 +35,9 @@ public class Simple {
             Duration duration = Duration.between(parsed_date, out_date);
 
             System.err.println("This message took " + duration.toMillis() + "ms");
+            if (!out.equals(message)) {
+                throw new Exception("Messages dont match! " + out + " doesnt equal " + message);
+            }
         }
     }
 }

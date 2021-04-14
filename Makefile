@@ -12,6 +12,7 @@ test: build
 	fluvio topic delete simple-send || true
 
 examples: build
+	fluvio topic delete simple-example || true
 	fluvio topic create simple-example || true
 	./gradlew -q run
 	fluvio topic delete simple-example || true
