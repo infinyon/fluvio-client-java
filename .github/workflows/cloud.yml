@@ -1,11 +1,11 @@
-name: CI
+name: Fluvio Cloud CI
 
 on:
   workflow_dispatch:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    - cron:  '0 14 * * *'
 
 jobs:
   cancel_previous_runs:
@@ -15,6 +15,7 @@ jobs:
       - uses: styfle/cancel-workflow-action@0.4.1
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
+
   smoke_test:
     name: Smoke test
     runs-on: ${{ matrix.os }}
@@ -22,8 +23,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         rust: [stable]
-        # Add Java 16 when https://github.com/gradle/gradle/issues/13481 has a
-        # better work around.
         java: [8, 11, 15]
     steps:
       - uses: actions/checkout@v2
@@ -37,18 +36,23 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-      - name: Build
-        run: |
-          make assemble
 
-      - name: Run Test
+      - name: Install fluvio
+        run: |
+          curl -fsS https://packages.fluvio.io/v1/install.sh | bash
+          echo "${HOME}/.fluvio/bin" >> $GITHUB_PATH
+
+      - name: Login to fluvio cloud
+        run: |
+          fluvio cloud login --email ${FLUVIO_CLOUD_TEST_USERNAME} --password ${FLUVIO_CLOUD_TEST_PASSWORD}
+        env:
+          FLUVIO_CLOUD_TEST_USERNAME: ${{ secrets.FLUVIO_CLOUD_TEST_USERNAME }}
+          FLUVIO_CLOUD_TEST_PASSWORD: ${{ secrets.FLUVIO_CLOUD_TEST_PASSWORD }}
+
+      - name: Run unit tests
         run: |
           make test
 
-      - name: Upload Test Results
-        timeout-minutes: 1
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: gradle-test-results
-          path: /home/runner/work/fluvio-client-java/fluvio-client-java/lib/build/reports/tests/test/
+      - name: Run examples
+        run: |
+          make examples

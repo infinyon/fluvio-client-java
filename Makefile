@@ -1,28 +1,25 @@
 .PHONY: assemble test clean docs
 
+GRADLE=./gradlew --no-daemon --no-build-cache
+
 assemble:
-	./gradlew assemble --no-daemon
+	$(GRADLE) assemble
 
 build:
-	./gradlew build -x test --no-daemon
+	$(GRADLE) build -x test
 
 test: build
-	fluvio topic create simple-send || true
-	FLV_SOCKET_WAIT=1200 ./gradlew cleanTest test --no-daemon -i
-	fluvio topic delete simple-send || true
+	FLV_SOCKET_WAIT=1200 $(GRADLE) cleanTest test -i
 
 examples: build
-	fluvio topic delete simple-example || true
-	fluvio topic create simple-example || true
-	./gradlew -q run --no-daemon
-	fluvio topic delete simple-example || true
+	$(GRADLE)  -q run
 
 clean:
 	cargo clean
-	./gradlew clean --no-daemon
+	$(GRADLE) clean
 
 docs:
-	./gradlew javadoc
+	$(GRADLE) javadoc
 
 publish:
-	./gradlew publish
+	$(GRADLE) publish
