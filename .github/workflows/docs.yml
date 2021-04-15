@@ -39,6 +39,7 @@ jobs:
           git merge -X theirs origin/main -m "Merge remote-tracking branch 'origin/main into docs" --allow-unrelated-histories
       - name: Build docs
         run: |
+          make docs
           rm -rf docs
           cp -r fluvio/build/docs/javadoc docs
           touch docs/.nojekyll
