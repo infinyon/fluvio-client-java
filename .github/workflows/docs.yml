@@ -40,7 +40,7 @@ jobs:
       - name: Build docs
         run: |
           make docs
-          cp -r fluvio/build/docs docs
+          cp -r fluvio/build/docs/javadoc/ docs/
           touch docs/.nojekyll
       - name: Commit files
         run: |
