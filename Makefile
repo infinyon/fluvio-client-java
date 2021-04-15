@@ -4,7 +4,7 @@ assemble:
 	./gradlew assemble --no-daemon
 
 build:
-	./gradlew build -x test
+	./gradlew build -x test --no-daemon
 
 test: build
 	fluvio topic create simple-send || true
@@ -14,7 +14,7 @@ test: build
 examples: build
 	fluvio topic delete simple-example || true
 	fluvio topic create simple-example || true
-	./gradlew -q run
+	./gradlew -q run --no-daemon
 	fluvio topic delete simple-example || true
 
 clean:

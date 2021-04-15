@@ -9,16 +9,12 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
-    //id 'cpp'
-    //id 'dev.nokee.jni-library'
-    id 'io.github.liurenjie1024.gradle.rust' version "0.1.0"
 
     // https://docs.gradle.org/current/userguide/publishing_maven.html
     id 'maven-publish'
 }
 group 'com.infinyon'
 version '0.0.0'
-//jar.archiveName = "fluvio.jar"
 
 repositories {
     // Use JCenter for resolving dependencies.
@@ -51,7 +47,6 @@ dependencies {
 }
 
 test {
-    systemProperty "java.library.path", file("${buildDir}/libs/shared").absolutePath
     dependsOn cleanTest
 }
 

@@ -78,6 +78,8 @@ class NativeUtils {
         System.err.println("Loading cdylib for: " + System.getProperty("os.name"));
         if (System.getProperty("os.name").equals("Linux")) {
             path = new String("/libfluvio_java.so");
+        } else if (System.getProperty("os.name").equals("Mac OS X")) {
+            path = new String("/libfluvio_java.dylib");
         }
 
         if (null == path || !path.startsWith("/")) {
