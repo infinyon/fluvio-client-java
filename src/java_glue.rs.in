@@ -57,7 +57,11 @@ foreign_class!(class Fluvio {
     // https://github.com/Dushistov/flapigen-rs/issues/253#issuecomment-515672499
     foreign_code r#"
     static {
-        System.loadLibrary("fluvio_java");
+        try {
+            NativeUtils.loadLibraryFromJar();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
     }
 "#;
 });
