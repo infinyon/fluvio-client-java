@@ -3,7 +3,7 @@ name: Docs
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [ main, fix-docs-ci ]
     tags:
       - 'v*'
 jobs:
@@ -40,7 +40,8 @@ jobs:
       - name: Build docs
         run: |
           make docs
-          cp -r fluvio/build/docs docs
+          rm -rf docs
+          cp -r fluvio/build/docs/javadoc docs
           touch docs/.nojekyll
       - name: Commit files
         run: |

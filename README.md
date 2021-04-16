@@ -6,19 +6,26 @@
 </div>
 <br />
 
-[![Build
-Status](https://github.com/infinyon/fluvio-client-java/workflows/CI/badge.svg)](https://github.com/infinyon/fluvio-client-java/actions)
+[![CI](https://github.com/infinyon/fluvio-client-java/actions/workflows/ci.yml/badge.svg)](https://github.com/infinyon/fluvio-client-java/actions/workflows/ci.yml)
+[![Fluvio Cloud CI](https://github.com/infinyon/fluvio-client-java/actions/workflows/cloud.yml/badge.svg)](https://github.com/infinyon/fluvio-client-java/actions/workflows/cloud.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/infinyon/fluvio-client-java/blob/master/LICENSE-APACHE)
+[![JavaDoc](https://img.shields.io/badge/docs-javadoc-blue)](https://infinyon.github.io/fluvio-client-java/)
 
 ## Documentation
-TODO:
-Fluvio client uses javadoc to generate the client API [documentation](https://infinyon.github.io/fluvio-client-java/fluvio.html).
+Fluvio client uses javadoc to generate the client API
+[documentation](https://infinyon.github.io/fluvio-client-java/javadoc/com/infinyon/fluvio/package-summary.html).
+
+Note: topic creation and deletion is not yet supported in this client.
 
 # Example Usage
 
-TODO
+Checkout our [example
+project](https://github.com/infinyon/fluvio-client-java/tree/main/examples) and
+our
+[`Simple.java`](https://github.com/infinyon/fluvio-client-java/blob/main/examples/src/main/java/com/fluvio/example/Simple.java).
 
 # Developer Notes
 
 Ensure that `JAVA_ROOT` points to the base directory for the java installation.
-It's under `/usr/lib/jvm/java-15-openjdk` for archlinux.
+It's under `/usr/lib/jvm/java-15-openjdk` for archlinux depending on the
+version of java.
