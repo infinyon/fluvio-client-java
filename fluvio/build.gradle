@@ -118,8 +118,6 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
-            groupId 'com.infinyon'
-            artifactId 'fluvio'
             from(components.java)
         }
     }

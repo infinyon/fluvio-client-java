@@ -21,5 +21,8 @@ clean:
 docs:
 	$(GRADLE) javadoc
 
+publish-local:
+	$(GRADLE) publishToMavenLocal
+
 publish:
 	$(GRADLE) publish

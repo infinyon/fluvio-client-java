@@ -24,6 +24,29 @@ project](https://github.com/infinyon/fluvio-client-java/tree/main/examples) and
 our
 [`Simple.java`](https://github.com/infinyon/fluvio-client-java/blob/main/examples/src/main/java/com/fluvio/example/Simple.java).
 
+Make sure your `build.gradle` has the `maven` section below
+```groovy
+repositories {
+    jcenter()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/infinyon/fluvio-client-java")
+    }
+}
+```
+and add `com.infinyon:fluvio:0.0.0` as a dependency. The section should look something like:
+```groovy
+dependencies {
+    // Use JUnit test framework.
+    testImplementation 'junit:junit:4.13'
+
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:29.0-jre'
+
+	implementation 'com.infinyon:fluvio:0.0.0'
+}
+```
+
 # Developer Notes
 
 Ensure that `JAVA_ROOT` points to the base directory for the java installation.
