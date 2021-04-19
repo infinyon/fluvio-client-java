@@ -15,7 +15,7 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
         rust: [stable]
-        java: [8] #, 11, 15, 16]
+        java: [8, 11, 15, 16]
     steps:
       - uses: actions/checkout@v2
 
@@ -54,7 +54,7 @@ jobs:
     strategy:
       matrix:
         rust: [stable]
-        java: [8] #, 11, 15, 16]
+        java: [8, 11, 15, 16]
     steps:
       - uses: actions/checkout@v2
 
@@ -91,7 +91,7 @@ jobs:
         run: |
           make publish-local
           ls ./fluvio/libs/ ./fluvio/build/resources/main/
-          jar tf ~/.m2/repository/com/infinyon/fluvio-1.8/0.0.1/fluvio-1.8-0.0.1.jar
+          jar tf ~/.m2/repository/com/infinyon/fluvio-*/*/fluvio-*-*.jar
 
       - name: Publish package
         run: |
