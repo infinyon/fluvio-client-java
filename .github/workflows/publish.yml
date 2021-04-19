@@ -16,6 +16,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         rust: [stable]
         java: [8, 11, 15, 16]
+    steps:
       - uses: actions/checkout@v2
 
       - name: Install ${{ matrix.rust }}
