@@ -71,19 +71,33 @@ jobs:
         run: |
           ls ./fluvio/libs/
 
-      - name: Publish package
-        run: |
-          make build
-
       - name: Download MacOS Lib
         uses: actions/download-artifact@v2
         with:
           name: "macos-latest-${{matrix.java}}"
           path: ./fluvio/libs/
 
+      - name: Download MacOS Lib
+        uses: actions/download-artifact@v2
+        with:
+          name: "macos-latest-${{matrix.java}}"
+          path: ./fluvio/build/resources/main/
+
+      - name: Build package
+        run: |
+          make build
+          ls ./fluvio/libs/ ./fluvio/build/resources/main/
+          jar tf fluvio/build/libs/fluvio-0.0.1.jar
+
+      - name: Publish local
+        run: |
+          make publish-local
+          ls ./fluvio/libs/ ./fluvio/build/resources/main/
+          jar tf ~/.m2/repository/com/infinyon/fluvio-1.8/0.0.1/fluvio-1.8-0.0.1.jar
+
       - name: Publish package
         run: |
-          ls ./fluvio/libs/
+          ls ./fluvio/libs/ ./fluvio/build/resources/main/
           jar tf fluvio/build/libs/fluvio-0.0.1.jar
           make publish
         env:
