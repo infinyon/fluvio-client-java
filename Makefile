@@ -22,7 +22,7 @@ docs:
 	$(GRADLE) javadoc
 
 publish-local:
-	$(GRADLE) publishToMavenLocal
+	$(GRADLE) publishToMavenLocal -x rust-deploy
 
 publish:
-	$(GRADLE) publish
+	$(GRADLE) publish -x rust-deploy
