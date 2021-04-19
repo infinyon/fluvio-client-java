@@ -34,7 +34,8 @@ repositories {
     }
 }
 ```
-and add `com.infinyon:fluvio:0.0.0` as a dependency. The section should look something like:
+and add `com.infinyon:fluvio-16:0.0.0` as a dependency. The section should look
+something like:
 ```groovy
 dependencies {
     // Use JUnit test framework.
@@ -43,9 +44,14 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:29.0-jre'
 
-	implementation 'com.infinyon:fluvio:0.0.0'
+	implementation 'com.infinyon:fluvio-16:0.0.0'
 }
 ```
+
+The `artfiactId` is dependent on the version of java. See [our
+packages](https://github.com/orgs/infinyon/packages?repo_name=fluvio-client-java)
+to see the published versions. If there's a version you'd like to be published
+please [open an issue](https://github.com/infinyon/fluvio-client-java/issues).
 
 # Developer Notes
 

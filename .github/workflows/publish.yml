@@ -30,7 +30,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
 
-      - name: Publish package
+      - name: Build Rust
         run: ./gradlew rust-deploy
 
       - name: "Upload Rust Static lib for ${{matrix.os}} for java - ${{matrix.java}}"
@@ -56,19 +56,25 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
 
-      - name: Download linux.index.node
+      - name: Publish package
+        run: |
+          make build
+
+      - name: Download Linux Lib
         uses: actions/download-artifact@v2
         with:
           name: "ubuntu-latest-${{matrix.java}}"
           path: ./fluvio/libs/
 
-      - name: Download linux.index.node
+      - name: Download MacOS Lib
         uses: actions/download-artifact@v2
         with:
           name: "macos-latest-${{matrix.java}}"
           path: ./fluvio/libs/
 
       - name: Publish package
-        run: make publish
+        run: |
+          ls ./fluvio/libs/
+          make publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
