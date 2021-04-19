@@ -13,7 +13,7 @@
 
 ## Documentation
 Fluvio client uses javadoc to generate the client API
-[documentation](https://infinyon.github.io/fluvio-client-java/javadoc/com/infinyon/fluvio/package-summary.html).
+[documentation](https://infinyon.github.io/fluvio-client-java/).
 
 Note: topic creation and deletion is not yet supported in this client.
 
