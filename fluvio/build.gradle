@@ -69,11 +69,11 @@ tasks.create(name: "cargo-output-dir", description: "Get cargo metadata") {
 // Build with cargo
 tasks.create(name: "cargo-build", type: Exec, description: "Running Cargo build", dependsOn: "cargo-output-dir") {
     workingDir rustBasePath
-    commandLine 'cargo', 'build', '--release'
+    commandLine 'cargo', 'build' //, '--release'
 }
 
 tasks.create(name: "rust-deploy", type: Sync, dependsOn: "cargo-build") {
-    from "${project.ext.cargo_target_directory}/release"
+    from "${project.ext.cargo_target_directory}/debug" ///release"
     include "*.dylib","*.so"
     into "libs/"
 }
