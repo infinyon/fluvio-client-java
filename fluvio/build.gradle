@@ -15,6 +15,11 @@ plugins {
 }
 group 'com.infinyon'
 version '0.0.0'
+/* TODO: Remove this probably.
+jar {
+    baseName = "fluvio-${JavaVersion.current()}"
+}
+*/
 
 repositories {
     // Use JCenter for resolving dependencies.
@@ -119,6 +124,7 @@ publishing {
     publications {
         gpr(MavenPublication) {
             from(components.java)
+            artifactId "fluvio-${JavaVersion.current()}"
         }
     }
 }

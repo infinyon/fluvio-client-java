@@ -10,12 +10,27 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # , macos-latest] TODO: Re-add macos and use build artfiacts
+        rust: [stable]
+        # better work around.
+        java: [8, 11, 15, 16]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+
+      - name: Install ${{ matrix.rust }}
+        uses: actions-rs/toolchain@v1
         with:
-          java-version: 8
+          toolchain: ${{ matrix.rust }}
+          override: true
+
+      - name: Setup java
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+
       - name: Publish package
-        run: gradle publish
+        run: make publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
