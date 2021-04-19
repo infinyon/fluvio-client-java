@@ -51,6 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install ${{ matrix.rust }}
         uses: actions-rs/toolchain@v1
         with:
           toolchain: ${{ matrix.rust }}
