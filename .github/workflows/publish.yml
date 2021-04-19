@@ -9,7 +9,7 @@ on:
       - 'v*'
 jobs:
 
-  build_macos_libs:
+  build_rust_libs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -40,9 +40,17 @@ jobs:
           path: ./fluvio/libs/
           retention-days: 5
 
+      - name: 'Upload Java src - linux'
+        uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'ubuntu')
+        with:
+          name: "java-src-${{matrix.java}}"
+          path: ./fluvio/src/main/java/com/infinyon/fluvio/
+          retention-days: 5
+
   publish:
     runs-on: [ubuntu-latest]
-    needs: [build_macos_libs]
+    needs: [build_rust_libs]
     strategy:
       matrix:
         rust: [stable]
@@ -72,6 +80,12 @@ jobs:
         with:
           name: "ubuntu-latest-${{matrix.java}}"
           path: ./fluvio/libs/
+
+      - name: Download Java src
+        uses: actions/download-artifact@v2
+        with:
+          name: "java-src-${{matrix.java}}"
+          path: ./fluvio/src/main/java/com/infinyon/fluvio/
 
       - name: Publish local
         run: |
