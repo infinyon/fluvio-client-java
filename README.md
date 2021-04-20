@@ -13,7 +13,7 @@
 
 ## Documentation
 Fluvio client uses javadoc to generate the client API
-[documentation](https://infinyon.github.io/fluvio-client-java/javadoc/com/infinyon/fluvio/package-summary.html).
+[documentation](https://infinyon.github.io/fluvio-client-java/).
 
 Note: topic creation and deletion is not yet supported in this client.
 
@@ -23,6 +23,35 @@ Checkout our [example
 project](https://github.com/infinyon/fluvio-client-java/tree/main/examples) and
 our
 [`Simple.java`](https://github.com/infinyon/fluvio-client-java/blob/main/examples/src/main/java/com/fluvio/example/Simple.java).
+
+Make sure your `build.gradle` has the `maven` section below
+```groovy
+repositories {
+    jcenter()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/infinyon/fluvio-client-java")
+    }
+}
+```
+and add `com.infinyon:fluvio-16:0.0.0` as a dependency. The section should look
+something like:
+```groovy
+dependencies {
+    // Use JUnit test framework.
+    testImplementation 'junit:junit:4.13'
+
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:29.0-jre'
+
+	implementation 'com.infinyon:fluvio-16:0.0.0'
+}
+```
+
+The `artfiactId` is dependent on the version of java. See [our
+packages](https://github.com/orgs/infinyon/packages?repo_name=fluvio-client-java)
+to see the published versions. If there's a version you'd like to be published
+please [open an issue](https://github.com/infinyon/fluvio-client-java/issues).
 
 # Developer Notes
 
