@@ -31,6 +31,11 @@ repositories {
     maven {
         name = "GitHubPackages"
         url = uri("https://maven.pkg.github.com/infinyon/fluvio-client-java")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+
+        }
     }
 }
 ```
@@ -44,7 +49,7 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:29.0-jre'
 
-	implementation 'com.infinyon:fluvio-16:0.0.0'
+    implementation 'com.infinyon:fluvio-16:0.0.1'
 }
 ```
 
@@ -55,6 +60,19 @@ please [open an issue](https://github.com/infinyon/fluvio-client-java/issues).
 
 # Developer Notes
 
-Ensure that `JAVA_ROOT` points to the base directory for the java installation.
+* Ensure that `JAVA_ROOT` points to the base directory for the java installation.
 It's under `/usr/lib/jvm/java-15-openjdk` for archlinux depending on the
 version of java.
+
+* CI will run `make test` will test that the rust is linked correctly but does
+not test the connection to a fluvio cluster. To verify that things work, run
+`make examples`.
+
+* To publish, update the `version` in
+[`fluvio/build.gradle`](https://github.com/infinyon/fluvio-client-java/blob/main/fluvio/build.gradle)
+to your liking and run the [Publish
+CI](https://github.com/infinyon/fluvio-client-java/actions/workflows/publish.yml).
+
+* The [documentation on github
+pages](https://infinyon.github.io/fluvio-client-java/) is updated on every
+merge into `main`.
