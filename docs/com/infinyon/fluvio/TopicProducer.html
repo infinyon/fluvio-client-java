@@ -81,6 +81,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <pre>public final class <span class="type-name-label">TopicProducer</span>
 extends java.lang.Object</pre>
+<div class="block"><p>Sends records to a particular topic.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -112,15 +113,19 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="alt-color" id="i2">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#send(byte%5B%5D,byte%5B%5D)">send</a></span>&#8203;(byte[]&nbsp;a0,
-byte[]&nbsp;a1)</code></th>
-<td class="col-last">&nbsp;</td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#send(byte%5B%5D,byte%5B%5D)">send</a></span>&#8203;(byte[]&nbsp;key,
+byte[]&nbsp;value)</code></th>
+<td class="col-last">
+<div class="block">Send a key/value record to this topic.</div>
+</td>
 </tr>
 <tr class="row-color" id="i3">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#send_record(byte%5B%5D,int)">send_record</a></span>&#8203;(byte[]&nbsp;a0,
-int&nbsp;a1)</code></th>
-<td class="col-last">&nbsp;</td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#send_record(byte%5B%5D,int)">send_record</a></span>&#8203;(byte[]&nbsp;value,
+int&nbsp;partition)</code></th>
+<td class="col-last">
+<div class="block">Send a record to a particular partition in this topic.</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -143,9 +148,10 @@ int&nbsp;a1)</code></th>
 <li>
 <section class="detail" id="send_record(byte[],int)">
 <h3>send_record</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">send_record</span>&#8203;(<span class="parameters">byte[]&nbsp;a0,
-int&nbsp;a1)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">send_record</span>&#8203;(<span class="parameters">byte[]&nbsp;value,
+int&nbsp;partition)</span>
                        throws <span class="exceptions">java.lang.Exception</span></div>
+<div class="block">Send a record to a particular partition in this topic.</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code>java.lang.Exception</code></dd>
@@ -155,9 +161,10 @@ int&nbsp;a1)</span>
 <li>
 <section class="detail" id="send(byte[],byte[])">
 <h3>send</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">send</span>&#8203;(<span class="parameters">byte[]&nbsp;a0,
-byte[]&nbsp;a1)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">send</span>&#8203;(<span class="parameters">byte[]&nbsp;key,
+byte[]&nbsp;value)</span>
                 throws <span class="exceptions">java.lang.Exception</span></div>
+<div class="block">Send a key/value record to this topic.</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code>java.lang.Exception</code></dd>

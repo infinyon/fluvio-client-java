@@ -81,6 +81,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <pre>public final class <span class="type-name-label">Record</span>
 extends java.lang.Object</pre>
+<div class="block">Carries the data (key and value) for a Record in a Fluvio stream.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -113,27 +114,37 @@ extends java.lang.Object</pre>
 <tr class="alt-color" id="i2">
 <td class="col-first"><code>byte[]</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#key()">key</a></span>()</code></th>
-<td class="col-last">&nbsp;</td>
+<td class="col-last">
+<div class="block">The key of this Record as bytes.</div>
+</td>
 </tr>
 <tr class="row-color" id="i3">
 <td class="col-first"><code>java.lang.String</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#key_string()">key_string</a></span>()</code></th>
-<td class="col-last">&nbsp;</td>
+<td class="col-last">
+<div class="block">The key of this Record as a String.</div>
+</td>
 </tr>
 <tr class="alt-color" id="i4">
 <td class="col-first"><code>long</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#offset()">offset</a></span>()</code></th>
-<td class="col-last">&nbsp;</td>
+<td class="col-last">
+<div class="block">The absolute offset in the partition where this Record is located.</div>
+</td>
 </tr>
 <tr class="row-color" id="i5">
 <td class="col-first"><code>byte[]</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#value()">value</a></span>()</code></th>
-<td class="col-last">&nbsp;</td>
+<td class="col-last">
+<div class="block">The value of this Record as bytes.</div>
+</td>
 </tr>
 <tr class="alt-color" id="i6">
 <td class="col-first"><code>java.lang.String</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#value_string()">value_string</a></span>()</code></th>
-<td class="col-last">&nbsp;</td>
+<td class="col-last">
+<div class="block">The contents of this Record as a String.</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -157,18 +168,21 @@ extends java.lang.Object</pre>
 <section class="detail" id="offset()">
 <h3>offset</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="member-name">offset</span>()</div>
+<div class="block">The absolute offset in the partition where this Record is located.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="value()">
 <h3>value</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="member-name">value</span>()</div>
+<div class="block">The value of this Record as bytes.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="key()">
 <h3>key</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="member-name">key</span>()</div>
+<div class="block">The key of this Record as bytes.</div>
 </section>
 </li>
 <li>
@@ -176,6 +190,7 @@ extends java.lang.Object</pre>
 <h3>value_string</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">java.lang.String</span>&nbsp;<span class="member-name">value_string</span>()
                                     throws <span class="exceptions">java.lang.Exception</span></div>
+<div class="block">The contents of this Record as a String.</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code>java.lang.Exception</code></dd>
@@ -187,6 +202,7 @@ extends java.lang.Object</pre>
 <h3>key_string</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">java.lang.String</span>&nbsp;<span class="member-name">key_string</span>()
                                   throws <span class="exceptions">java.lang.Exception</span></div>
+<div class="block">The key of this Record as a String.</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code>java.lang.Exception</code></dd>

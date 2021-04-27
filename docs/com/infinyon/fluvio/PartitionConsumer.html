@@ -81,6 +81,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <pre>public final class <span class="type-name-label">PartitionConsumer</span>
 extends java.lang.Object</pre>
+<div class="block"><p>Create streams to read records from specific Fluvio topics and partitions.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -112,8 +113,10 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="alt-color" id="i2">
 <td class="col-first"><code><a href="PartitionConsumerStream.html" title="class in com.infinyon.fluvio">PartitionConsumerStream</a></code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#stream(com.infinyon.fluvio.Offset)">stream</a></span>&#8203;(<a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a>&nbsp;a0)</code></th>
-<td class="col-last">&nbsp;</td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#stream(com.infinyon.fluvio.Offset)">stream</a></span>&#8203;(<a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a>&nbsp;offset)</code></th>
+<td class="col-last">
+<div class="block">Create a stream to read records beginning at the given <a href="Offset.html" title="class in com.infinyon.fluvio"><code>Offset</code></a></div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -136,8 +139,9 @@ extends java.lang.Object</pre>
 <li>
 <section class="detail" id="stream(com.infinyon.fluvio.Offset)">
 <h3>stream</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="PartitionConsumerStream.html" title="class in com.infinyon.fluvio">PartitionConsumerStream</a></span>&nbsp;<span class="member-name">stream</span>&#8203;(<span class="parameters"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a>&nbsp;a0)</span>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="PartitionConsumerStream.html" title="class in com.infinyon.fluvio">PartitionConsumerStream</a></span>&nbsp;<span class="member-name">stream</span>&#8203;(<span class="parameters"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a>&nbsp;offset)</span>
                                      throws <span class="exceptions">java.lang.Exception</span></div>
+<div class="block">Create a stream to read records beginning at the given <a href="Offset.html" title="class in com.infinyon.fluvio"><code>Offset</code></a></div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code>java.lang.Exception</code></dd>

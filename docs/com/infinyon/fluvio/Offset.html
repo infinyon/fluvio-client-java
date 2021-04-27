@@ -81,6 +81,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <pre>public final class <span class="type-name-label">Offset</span>
 extends java.lang.Object</pre>
+<div class="block"><p>Describes the position of a record in a Fluvio partition.</p></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -102,13 +103,17 @@ extends java.lang.Object</pre>
 <tbody>
 <tr class="alt-color" id="i0">
 <td class="col-first"><code>static <a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#absolute(long)">absolute</a></span>&#8203;(long&nbsp;a0)</code></th>
-<td class="col-last">&nbsp;</td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#absolute(long)">absolute</a></span>&#8203;(long&nbsp;offset)</code></th>
+<td class="col-last">
+<div class="block">Create an Offset at a specific absolute position in the partition.</div>
+</td>
 </tr>
 <tr class="row-color" id="i1">
 <td class="col-first"><code>static <a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#beginning()">beginning</a></span>()</code></th>
-<td class="col-last">&nbsp;</td>
+<td class="col-last">
+<div class="block">Create an Offset pointing to the very first record in the partition.</div>
+</td>
 </tr>
 <tr class="alt-color" id="i2">
 <td class="col-first"><code>void</code></td>
@@ -118,7 +123,9 @@ extends java.lang.Object</pre>
 <tr class="row-color" id="i3">
 <td class="col-first"><code>static <a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#end()">end</a></span>()</code></th>
-<td class="col-last">&nbsp;</td>
+<td class="col-last">
+<div class="block">Create an Offset pointing to the very last record in the partition.</div>
+</td>
 </tr>
 <tr class="alt-color" id="i4">
 <td class="col-first"><code>protected void</code></td>
@@ -127,13 +134,17 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="row-color" id="i5">
 <td class="col-first"><code>static <a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#from_beginning(long)">from_beginning</a></span>&#8203;(long&nbsp;a0)</code></th>
-<td class="col-last">&nbsp;</td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#from_beginning(long)">from_beginning</a></span>&#8203;(long&nbsp;offset)</code></th>
+<td class="col-last">
+<div class="block">Create an Offset pointing to the record X positions from the beginning of the partition.</div>
+</td>
 </tr>
 <tr class="alt-color" id="i6">
 <td class="col-first"><code>static <a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#from_end(long)">from_end</a></span>&#8203;(long&nbsp;a0)</code></th>
-<td class="col-last">&nbsp;</td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#from_end(long)">from_end</a></span>&#8203;(long&nbsp;offset)</code></th>
+<td class="col-last">
+<div class="block">Create an Offset pointing to the record X positions from the end of the partition.</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -156,8 +167,9 @@ extends java.lang.Object</pre>
 <li>
 <section class="detail" id="absolute(long)">
 <h3>absolute</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></span>&nbsp;<span class="member-name">absolute</span>&#8203;(<span class="parameters">long&nbsp;a0)</span>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></span>&nbsp;<span class="member-name">absolute</span>&#8203;(<span class="parameters">long&nbsp;offset)</span>
                        throws <span class="exceptions">java.lang.Exception</span></div>
+<div class="block">Create an Offset at a specific absolute position in the partition.</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code>java.lang.Exception</code></dd>
@@ -168,24 +180,28 @@ extends java.lang.Object</pre>
 <section class="detail" id="beginning()">
 <h3>beginning</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></span>&nbsp;<span class="member-name">beginning</span>()</div>
+<div class="block">Create an Offset pointing to the very first record in the partition.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="from_beginning(long)">
 <h3>from_beginning</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></span>&nbsp;<span class="member-name">from_beginning</span>&#8203;(<span class="parameters">long&nbsp;a0)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></span>&nbsp;<span class="member-name">from_beginning</span>&#8203;(<span class="parameters">long&nbsp;offset)</span></div>
+<div class="block">Create an Offset pointing to the record X positions from the beginning of the partition.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="end()">
 <h3>end</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></span>&nbsp;<span class="member-name">end</span>()</div>
+<div class="block">Create an Offset pointing to the very last record in the partition.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="from_end(long)">
 <h3>from_end</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></span>&nbsp;<span class="member-name">from_end</span>&#8203;(<span class="parameters">long&nbsp;a0)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Offset.html" title="class in com.infinyon.fluvio">Offset</a></span>&nbsp;<span class="member-name">from_end</span>&#8203;(<span class="parameters">long&nbsp;offset)</span></div>
+<div class="block">Create an Offset pointing to the record X positions from the end of the partition.</div>
 </section>
 </li>
 <li>
