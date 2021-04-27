@@ -41,30 +41,67 @@ mod _Fluvio {
     }
 }
 
-foreign_class!(class Fluvio {
-    self_type Fluvio;
-    private constructor = empty;
-    fn _Fluvio::connect() -> Result<Fluvio, String>;
-    fn _Fluvio::partition_consumer(
-        &self,
-        _: String,
-        _ : i32
-    ) -> Result<PartitionConsumer, String>;
-    fn _Fluvio::topic_producer(
-        &self,
-        _: String
-    ) -> Result<TopicProducer, String>;
-    // https://github.com/Dushistov/flapigen-rs/issues/253#issuecomment-515672499
-    foreign_code r#"
-    static {
-        try {
-            NativeUtils.loadLibraryFromJar();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
+foreign_class!(
+    /// <p>The Fluvio Java client for interacting with Fluvio streams from Java.</p>
+    ///
+    /// <p>
+    /// The Fluvio class does not provide a public constructor, instead it provides
+    /// a static function that first connects to the target cluster and then returns
+    /// a Fluvio object, representing a successfully-opened connection. If Fluvio
+    /// fails to connect to a cluster, an exception will be thrown instead.
+    /// </p>
+    ///
+    /// {@code
+    /// Fluvio fluvio = new Fluvio();
+    /// }
+    ///
+    /// <p>
+    /// The cluster that the client connects to is determined by the active profile
+    /// configured by the Fluvio CLI. Make sure you have
+    /// <a href="https://fluvio.io/docs/getting-started/">followed the getting started guide</a>
+    /// and used the CLI to successfully connect to a running cluster, either on
+    /// <a href="https://cloud.fluvio.io/signup">Fluvio Cloud</a>
+    /// or running locally.
+    /// </p>
+    ///
+    /// <p>
+    /// Once a Fluvio object is created, it may be used to obtain a {@link TopicProducer}
+    /// or a {@link PartitionConsumer}, which may be used to send and receive records,
+    /// respectively.
+    /// </p>
+    ///
+    class Fluvio {
+        self_type Fluvio;
+        private constructor = empty;
+
+        /// Connect to a Fluvio cluster and return a {@link Fluvio} object on success.
+        fn _Fluvio::connect() -> Result<Fluvio, String>;
+
+        /// Create a {@link PartitionConsumer} that consumes records from the specified
+        /// topic and partition.
+        fn _Fluvio::partition_consumer(
+            &self,
+            topic: String,
+            partition: i32
+        ) -> Result<PartitionConsumer, String>;
+
+        /// Create a {@link TopicProducer} which produces records to the specified topic.
+        fn _Fluvio::topic_producer(
+            &self,
+            topic: String
+        ) -> Result<TopicProducer, String>;
+
+        // https://github.com/Dushistov/flapigen-rs/issues/253#issuecomment-515672499
+        foreign_code r#"
+        static {
+            try {
+                NativeUtils.loadLibraryFromJar();
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        }"#;
     }
-"#;
-});
+);
 
 
 #[allow(non_snake_case)]
@@ -81,13 +118,19 @@ mod _PartitionConsumer {
         })
     }
 }
-foreign_class!(class PartitionConsumer {
-    self_type PartitionConsumer;
-    private constructor = empty;
-    fn _PartitionConsumer::stream(
-        &self, _: &Offset,
-    ) -> Result<PartitionConsumerStream, String>;
-});
+foreign_class!(
+    /// <p>Create streams to read records from specific Fluvio topics and partitions.</p>
+    class PartitionConsumer {
+        self_type PartitionConsumer;
+        private constructor = empty;
+
+        /// Create a stream to read records beginning at the given {@link Offset}
+        fn _PartitionConsumer::stream(
+            &self,
+            offset: &Offset,
+        ) -> Result<PartitionConsumerStream, String>;
+    }
+);
 
 type PartitionConsumerIteratorInner =
     Pin<Box<dyn Stream<Item = Result<Record, FluvioError>> + Send>>;
@@ -105,13 +148,16 @@ impl PartitionConsumerStream {
     }
 }
 
-foreign_class!(class PartitionConsumerStream{
-    self_type PartitionConsumerStream;
-    private constructor = empty;
-    fn PartitionConsumerStream::next(
-        &mut self
-    ) -> Result<Record, String>;
-});
+foreign_class!(
+    /// A stream that yields records from the origin topic and partition, starting at the given offset.
+    class PartitionConsumerStream{
+        self_type PartitionConsumerStream;
+        private constructor = empty;
+        fn PartitionConsumerStream::next(
+            &mut self
+        ) -> Result<Record, String>;
+    }
+);
 foreign_class!(class FluvioError {
     self_type FluvioError;
     private constructor = empty;
@@ -135,20 +181,27 @@ mod _TopicProducer {
         run_block_on(producer.send(key, value)).map_err(fluvio_error_to_string)
     }
 }
-foreign_class!(class TopicProducer {
-    self_type TopicProducer;
-    private constructor = empty;
-    fn _TopicProducer::send_record(
-        &self,
-        _: &[u8],
-        _ : i32
-    ) -> Result<(), String>;
-    fn _TopicProducer::send(
-        &self,
-        _: &[u8],
-        _ : &[u8]
-    ) -> Result<(), String>;
-});
+foreign_class!(
+    /// <p>Sends records to a particular topic.</p>
+    class TopicProducer {
+        self_type TopicProducer;
+        private constructor = empty;
+
+        /// Send a record to a particular partition in this topic.
+        fn _TopicProducer::send_record(
+            &self,
+            value: &[u8],
+            partition: i32
+        ) -> Result<(), String>;
+
+        /// Send a key/value record to this topic.
+        fn _TopicProducer::send(
+            &self,
+            key: &[u8],
+            value: &[u8]
+        ) -> Result<(), String>;
+    }
+);
 
 
 #[allow(non_snake_case)]
@@ -175,15 +228,28 @@ mod _Record {
     }
 }
 
-foreign_class!(class Record {
-    self_type Record;
-    private constructor = empty;
-    fn Record::offset(&self) -> i64;
-    fn Record::value(&self) -> &[u8];
-    fn _Record::key(&self) -> &[u8];
-    fn _Record::value_string(&self) -> Result<String, String>;
-    fn _Record::key_string(&self) -> Result<String, String>;
-});
+foreign_class!(
+    /// Carries the data (key and value) for a Record in a Fluvio stream.
+    class Record {
+        self_type Record;
+        private constructor = empty;
+
+        /// The absolute offset in the partition where this Record is located.
+        fn Record::offset(&self) -> i64;
+
+        /// The value of this Record as bytes.
+        fn Record::value(&self) -> &[u8];
+
+        /// The key of this Record as bytes.
+        fn _Record::key(&self) -> &[u8];
+
+        /// The contents of this Record as a String.
+        fn _Record::value_string(&self) -> Result<String, String>;
+
+        /// The key of this Record as a String.
+        fn _Record::key_string(&self) -> Result<String, String>;
+    }
+);
 
 #[allow(non_snake_case)]
 mod _Offset {
@@ -193,15 +259,28 @@ mod _Offset {
     }
 }
 
-foreign_class!(class Offset {
-    self_type Offset;
-    private constructor = empty;
-    fn _Offset::absolute(_ :i64) -> Result<Offset, String>;
-    fn Offset::beginning() -> Offset;
-    fn Offset::from_beginning(_: u32) -> Offset;
-    fn Offset::end() -> Offset;
-    fn Offset::from_end(_: u32) -> Offset;
-});
+foreign_class!(
+    /// <p>Describes the position of a record in a Fluvio partition.</p>
+    class Offset {
+        self_type Offset;
+        private constructor = empty;
+
+        /// Create an Offset at a specific absolute position in the partition.
+        fn _Offset::absolute(offset: i64) -> Result<Offset, String>;
+
+        /// Create an Offset pointing to the very first record in the partition.
+        fn Offset::beginning() -> Offset;
+
+        /// Create an Offset pointing to the record X positions from the beginning of the partition.
+        fn Offset::from_beginning(offset: u32) -> Offset;
+
+        /// Create an Offset pointing to the very last record in the partition.
+        fn Offset::end() -> Offset;
+
+        /// Create an Offset pointing to the record X positions from the end of the partition.
+        fn Offset::from_end(offset: u32) -> Offset;
+    }
+);
 
 // Not sure how I feel about this but:
 // https://github.com/Dushistov/flapigen-rs/issues/143#issuecomment-664131615
