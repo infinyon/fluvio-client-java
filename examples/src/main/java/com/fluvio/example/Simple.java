@@ -27,9 +27,9 @@ public class Simple {
         String topic = UUID.randomUUID().toString();
         create_topic(topic);
 
-        TopicProducer producer = fluvio.topic_producer(new String(topic));
-        PartitionConsumer consumer = fluvio.partition_consumer(new String(topic), 0);
-        producer.send_record(new String("").getBytes(), 0);
+        TopicProducer producer = fluvio.topic_producer(topic);
+        PartitionConsumer consumer = fluvio.partition_consumer(topic, 0);
+        producer.send_record("".getBytes(), 0);
         PartitionConsumerStream stream = consumer.stream(Offset.beginning());
         stream.next();
 
@@ -40,7 +40,7 @@ public class Simple {
             producer.send_record(message.getBytes(), 0);
             Record record = stream.next();
 
-            String out = new String(record.value());
+            String out = record.value();
             LocalDateTime out_date = LocalDateTime.now();
             LocalDateTime parsed_date = LocalDateTime.parse(out);
             Duration duration = Duration.between(parsed_date, out_date);
