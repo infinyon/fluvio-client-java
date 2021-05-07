@@ -40,7 +40,7 @@ public class Simple {
             producer.send_record(message.getBytes(), 0);
             Record record = stream.next();
 
-            String out = new String(record.value());
+            String out = record.value_string();
             LocalDateTime out_date = LocalDateTime.now();
             LocalDateTime parsed_date = LocalDateTime.parse(out);
             Duration duration = Duration.between(parsed_date, out_date);
