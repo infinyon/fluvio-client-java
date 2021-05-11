@@ -74,15 +74,15 @@ class NativeUtils {
      */
     public static void loadLibraryFromJar() throws IOException {
 
-        String path = new String();
+        String path = "";
         System.err.println("Loading cdylib for: " + System.getProperty("os.name"));
         if (System.getProperty("os.name").equals("Linux")) {
-            path = new String("/libfluvio_java.so");
+            path = "/libfluvio_java.so";
         } else if (System.getProperty("os.name").equals("Mac OS X")) {
-            path = new String("/libfluvio_java.dylib");
+            path = "/libfluvio_java.dylib";
         }
 
-        if (null == path || !path.startsWith("/")) {
+        if (!path.startsWith("/")) {
             throw new IllegalArgumentException("The path has to be absolute (start with '/').");
         }
 
