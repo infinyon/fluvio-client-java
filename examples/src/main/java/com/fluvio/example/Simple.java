@@ -29,7 +29,7 @@ public class Simple {
 
         TopicProducer producer = fluvio.topic_producer(topic);
         PartitionConsumer consumer = fluvio.partition_consumer(topic, 0);
-        producer.send_record("".getBytes(), 0);
+        producer.send("".getBytes(), "".getBytes());
         PartitionConsumerStream stream = consumer.stream(Offset.beginning());
         stream.next();
 
@@ -37,7 +37,7 @@ public class Simple {
             LocalDateTime in_date = LocalDateTime.now();
             String message = ("" + in_date);
 
-            producer.send_record(message.getBytes(), 0);
+            producer.send("".getBytes(), message.getBytes());
             Record record = stream.next();
 
             String out = record.value_string();
