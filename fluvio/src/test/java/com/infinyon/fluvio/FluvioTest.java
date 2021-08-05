@@ -21,8 +21,8 @@ public class FluvioTest {
         } catch (Exception e) {
             System.err.println("exception: " + e);
             assertTrue(
-                e.getMessage().equals("FlvSocketError(IoError(Os { code: 111, kind: ConnectionRefused, message: \"Connection refused\" }))") ||
-                e.getMessage().equals("ConfigError(NoActiveProfile)")
+                e.getMessage().equals("Socket(Io(Os { code: 111, kind: ConnectionRefused, message: \"Connection refused\" }))") ||
+                e.getMessage().equals("ClientConfig(NoActiveProfile)")
             );
         }
     }

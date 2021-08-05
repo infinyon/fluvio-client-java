@@ -1,6 +1,6 @@
 [package]
 name = "fluvio-java"
-version = "0.0.2"
+version = "0.9.0"
 edition = "2018"
 authors = ["Fluvio Contributors <team@fluvio.io>"]
 resolver = "2"
@@ -11,10 +11,10 @@ name = "fluvio_java"
 
 [build-dependencies]
 flapigen = "0.6.0-pre7"
-env_logger = "^0.7"
-bindgen = { version = "0.57.0", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
+env_logger = "^0.9"
+bindgen = { version = "0.59.0", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
 [dependencies]
 log = "^0.4.6"
-fluvio = "0.8.4"
-fluvio-future = { version = "0.1.15", features = ["task", "io"] }
+fluvio = "0.9.0"
+fluvio-future = { version = "0.3.8", features = ["task", "io"] }
