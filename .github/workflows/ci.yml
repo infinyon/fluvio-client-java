@@ -24,7 +24,7 @@ jobs:
         rust: [stable]
         # Add Java 16 when https://github.com/gradle/gradle/issues/13481 has a
         # better work around.
-        java: [8, 11, 15, 16]
+        java: [8, 11, 16, 17]
     steps:
       - uses: actions/checkout@v2
       - name: Install ${{ matrix.rust }}
@@ -34,9 +34,12 @@ jobs:
           override: true
 
       - name: Setup java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2.3.1
         with:
           java-version: ${{ matrix.java }}
+          cache: 'gradle'
+          distribution: 'temurin'
+
       - name: Build
         run: |
           make assemble
