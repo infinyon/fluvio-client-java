@@ -1,5 +1,4 @@
 /target
-Cargo.lock
 
 # Ignore Gradle project-specific cache directory
 .gradle
