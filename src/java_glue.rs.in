@@ -3,6 +3,7 @@ use fluvio::{
     PartitionConsumer,
     TopicProducer,
     FluvioError,
+    dataplane::ErrorCode,
     Offset,
     consumer::Record,
 };
@@ -132,7 +133,6 @@ foreign_class!(
     }
 );
 
-use fluvio::dataplane::ErrorCode;
 type PartitionConsumerIteratorInner =
     Pin<Box<dyn Stream<Item = Result<Record, ErrorCode>> + Send>>;
 

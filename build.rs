@@ -1,7 +1,6 @@
-use flapigen::{LanguageConfig, JavaConfig, JavaReachabilityFence};
+use flapigen::{JavaConfig, JavaReachabilityFence, LanguageConfig};
 use std::{
-    env,
-    fs,
+    env, fs,
     path::{Path, PathBuf},
 };
 
@@ -18,12 +17,12 @@ fn main() {
 
     let java_cfg = JavaConfig::new(
         Path::new("fluvio")
-        .join("src")
-        .join("main")
-        .join("java")
-        .join("com")
-        .join("infinyon")
-        .join("fluvio"),
+            .join("src")
+            .join("main")
+            .join("java")
+            .join("com")
+            .join("infinyon")
+            .join("fluvio"),
         "com.infinyon.fluvio".into(),
     )
     //.use_optional_package("com.hadisatrio.optional".into())
@@ -38,9 +37,7 @@ fn main() {
     let out_dir = env::var("OUT_DIR").unwrap();
     let out_src = Path::new(&out_dir).join("java_glue.rs");
     let flap_gen =
-        flapigen::Generator::new(
-            LanguageConfig::JavaConfig(java_cfg)
-        ).rustfmt_bindings(true);
+        flapigen::Generator::new(LanguageConfig::JavaConfig(java_cfg)).rustfmt_bindings(true);
     flap_gen.expand("java bindings", &in_src, &out_src);
     println!("cargo:rerun-if-changed={}", in_src.display());
 }
