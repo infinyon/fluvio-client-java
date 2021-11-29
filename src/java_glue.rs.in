@@ -114,7 +114,7 @@ mod _PartitionConsumer {
         Ok(PartitionConsumerStream {
             inner: Box::pin(run_block_on(
                consumer.stream(offset.clone())
-            ).map_err(fluvio_error_to_string)?)
+            ).map_err(|e| format!("{:?}", e))?)
         })
     }
 }
@@ -132,8 +132,9 @@ foreign_class!(
     }
 );
 
+use fluvio::dataplane::ErrorCode;
 type PartitionConsumerIteratorInner =
-    Pin<Box<dyn Stream<Item = Result<Record, FluvioError>> + Send>>;
+    Pin<Box<dyn Stream<Item = Result<Record, ErrorCode>> + Send>>;
 
 pub struct PartitionConsumerStream {
     pub inner: PartitionConsumerIteratorInner,
@@ -141,7 +142,7 @@ pub struct PartitionConsumerStream {
 impl PartitionConsumerStream {
     pub fn next(&mut self) -> Result<Record, String> {
         if let Some(res) = run_block_on(self.inner.next()) {
-            res.map_err(fluvio_error_to_string)
+            res.map_err(|e| format!("{:?}", e))
         } else {
             Err(String::from("Stream ended"))
         }
