@@ -172,7 +172,7 @@ mod _TopicProducer {
         key: &[u8],
         value: &[u8],
     ) -> Result<(), String> {
-        run_block_on(producer.send(key, value)).map_err(fluvio_error_to_string)
+        run_block_on(producer.send(key, value)).map_err(fluvio_error_to_string).map(|_| ())
     }
 }
 foreign_class!(
