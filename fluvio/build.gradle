@@ -14,7 +14,7 @@ plugins {
     id 'maven-publish'
 }
 group 'com.infinyon'
-version '0.12.0'
+version '0.12.6'
 
 repositories {
     // Use JCenter for resolving dependencies.
