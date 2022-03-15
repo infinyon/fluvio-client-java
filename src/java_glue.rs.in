@@ -176,10 +176,8 @@ mod _TopicProducer {
     }
     pub fn flush(
         producer: &TopicProducer,
-    ) -> Result<(), FluvioError> {
-        run_block_on(
-            producer.flush()
-        )
+    ) -> Result<(), String> {
+        run_block_on(producer.flush()).map_err(fluvio_error_to_string)
     }
 }
 foreign_class!(
@@ -194,11 +192,12 @@ foreign_class!(
             key: &[u8],
             value: &[u8]
         ) -> Result<(), String>;
+
+        fn _TopicProducer::flush(
+            &self,
+        ) -> Result<(), String>;
     }
-    /// <p>Flushes all the records in the send queue.</p>
-    fn _TopicProducer::flush(
-        &self,
-    ) -> Result<(), FluvioError>;
+
 );
 
 
