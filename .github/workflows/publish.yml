@@ -35,14 +35,14 @@ jobs:
         run: ./gradlew rust-deploy
 
       - name: "Upload Rust Static lib for ${{matrix.os}} for java - ${{matrix.java}}"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: "${{matrix.os}}-${{matrix.java}}"
           path: ./fluvio/libs/
           retention-days: 5
 
       - name: 'Upload Java src - linux'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: startsWith(matrix.os, 'ubuntu')
         with:
           name: "java-src-${{matrix.java}}"
