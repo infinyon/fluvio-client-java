@@ -73,19 +73,19 @@ jobs:
           distribution: 'temurin'
 
       - name: Download MacOS Lib
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: "macos-latest-${{matrix.java}}"
           path: ./fluvio/libs/
 
       - name: Download Linux Lib
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: "ubuntu-latest-${{matrix.java}}"
           path: ./fluvio/libs/
 
       - name: Download Java src
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: "java-src-${{matrix.java}}"
           path: ./fluvio/src/main/java/com/infinyon/fluvio/
