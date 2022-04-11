@@ -51,7 +51,7 @@ jobs:
       - name: Upload Test Results
         timeout-minutes: 1
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: gradle-test-results
           path: /home/runner/work/fluvio-client-java/fluvio-client-java/lib/build/reports/tests/test/
