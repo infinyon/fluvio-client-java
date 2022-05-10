@@ -29,9 +29,9 @@
   </module>
   <!-- https://checkstyle.org/config_filters.html#SuppressionFilter -->
   <module name="SuppressionFilter">
-    <property name="file" value="${org.checkstyle.google.suppressionfilter.config}"
+    <property name="file" value="${config_loc}/checkstyle-suppressions.xml"
            default="checkstyle-suppressions.xml" />
-    <property name="optional" value="true"/>
+    <property name="optional" value="false"/>
   </module>
 
   <!-- Checks for whitespace                               -->
