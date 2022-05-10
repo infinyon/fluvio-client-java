@@ -84,13 +84,13 @@ foreign_class!(
             &self,
             topic: String,
             partition: i32
-        ) -> Result<PartitionConsumer, String>;
+        ) -> Result<PartitionConsumer, String>; alias consumer;
 
         /// Create a {@link TopicProducer} which produces records to the specified topic.
         fn _Fluvio::topic_producer(
             &self,
             topic: String
-        ) -> Result<TopicProducer, String>;
+        ) -> Result<TopicProducer, String>;  alias producer;
 
         // https://github.com/Dushistov/flapigen-rs/issues/253#issuecomment-515672499
         foreign_code r#"
@@ -100,7 +100,8 @@ foreign_class!(
             } catch (java.io.IOException e) {
                 e.printStackTrace();
             }
-        }"#;
+        }
+        "#;
     }
 );
 
@@ -125,7 +126,7 @@ foreign_class!(
         self_type PartitionConsumer;
         private constructor = empty;
 
-        /// Create a stream to read records beginning at the given {@link Offset}
+        /// Create a stream to read records beginning at the given {@link Offset}.
         fn _PartitionConsumer::stream(
             &self,
             offset: &Offset,

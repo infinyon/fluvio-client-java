@@ -1,30 +1,21 @@
 package com.infinyon.fluvio;
 
-//import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import com.infinyon.fluvio.Fluvio;
-import com.infinyon.fluvio.TopicProducer;
-import com.infinyon.fluvio.PartitionConsumer;
-import com.infinyon.fluvio.PartitionConsumerStream;
-import com.infinyon.fluvio.Record;
-import com.infinyon.fluvio.Offset;
-import java.util.Date;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class FluvioTest {
 
-    @Test public void testFluvioConnect() {
-        try {
-            Fluvio fluvio = Fluvio.connect();
-        } catch (Exception e) {
-            System.err.println("exception: " + e);
-            assertTrue(
-                e.getMessage().equals("Socket(Io(Os { code: 111, kind: ConnectionRefused, message: \"Connection refused\" }))") ||
-                e.getMessage().equals("ClientConfig(NoActiveProfile)")
-            );
-        }
+    @Test
+    public void testFluvioConnect() {
+        Exception thrown = assertThrows(Exception.class, Fluvio::connect);
+        assertThat(thrown.getMessage(), anyOf(
+            containsString(
+                "Socket(Io(Os { code: 61, kind: ConnectionRefused, message: \"Connection refused\" }))"),
+            containsString("ClientConfig(NoActiveProfile)")
+        ));
     }
 }
