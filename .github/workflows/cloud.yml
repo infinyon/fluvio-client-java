@@ -39,6 +39,10 @@ jobs:
           cache: 'gradle'
           distribution: 'temurin'
 
+      - name: Run unit tests
+        run: |
+          make test -i
+
       - name: Install fluvio
         run: |
           curl -fsS https://packages.fluvio.io/v1/install.sh | bash
@@ -50,10 +54,6 @@ jobs:
         env:
           FLUVIO_CLOUD_TEST_USERNAME: ${{ secrets.FLUVIO_CLOUD_TEST_USERNAME }}
           FLUVIO_CLOUD_TEST_PASSWORD: ${{ secrets.FLUVIO_CLOUD_TEST_PASSWORD }}
-
-      - name: Run unit tests
-        run: |
-          make test
 
       - name: Run examples
         run: |
