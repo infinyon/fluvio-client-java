@@ -1,6 +1,6 @@
 [package]
 name = "fluvio-java"
-version = "0.9.0"
+version = "0.10.0"
 edition = "2018"
 authors = ["Fluvio Contributors <team@fluvio.io>"]
 resolver = "2"
@@ -16,7 +16,7 @@ bindgen = { version = "0.59.0", default-features = false, features = ["logging",
 
 [dependencies]
 log = "^0.4.16"
-fluvio = "0.12.6"
+fluvio = "0.12.11"
 fluvio-future = { version = "0.3.16", features = ["task", "io"] }
 
 [patch.crates-io]
