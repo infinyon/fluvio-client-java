@@ -6,7 +6,7 @@ assemble:
 	$(GRADLE) assemble
 
 build:
-	$(GRADLE) build -x test
+	$(GRADLE) build
 
 test: build
 	FLV_SOCKET_WAIT=1200 $(GRADLE) cleanTest test -i
@@ -20,6 +20,9 @@ clean:
 
 docs:
 	$(GRADLE) javadoc
+
+checkstyle:
+	$(GRADLE) checkstyleMain
 
 publish-local:
 	$(GRADLE) publishToMavenLocal -x rust-deploy

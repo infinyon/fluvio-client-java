@@ -27,8 +27,8 @@ public class Simple {
         String topic = UUID.randomUUID().toString();
         create_topic(topic);
 
-        TopicProducer producer = fluvio.topic_producer(topic);
-        PartitionConsumer consumer = fluvio.partition_consumer(topic, 0);
+        TopicProducer producer = fluvio.producer(topic);
+        PartitionConsumer consumer = fluvio.consumer(topic, 0);
         producer.send("".getBytes(), "".getBytes());
         PartitionConsumerStream stream = consumer.stream(Offset.beginning());
         stream.next();

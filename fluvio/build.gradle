@@ -12,9 +12,20 @@ plugins {
 
     // https://docs.gradle.org/current/userguide/publishing_maven.html
     id 'maven-publish'
+
+    // https://docs.gradle.org/current/userguide/checkstyle_plugin.html
+    id 'checkstyle'
 }
+
+checkstyle {
+  ignoreFailures = false
+  maxWarnings = 0
+  configFile file('../config/checkstyle/checkstyle-8.37.xml');
+  toolVersion '8.37';
+}
+
 group 'com.infinyon'
-version '0.12.6'
+version '0.12.11'
 
 repositories {
     // Use JCenter for resolving dependencies.
@@ -34,7 +45,9 @@ sourceSets {
 
 dependencies {
     // Use JUnit test framework.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation platform('org.junit:junit-bom:5.8.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
@@ -46,6 +59,7 @@ dependencies {
 test {
     //systemProperty "java.library.path", file("${buildDir}/libs/shared").absolutePath
     dependsOn cleanTest
+    useJUnitPlatform()
 }
 
 // app/build.gradle

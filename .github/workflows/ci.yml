@@ -48,6 +48,10 @@ jobs:
         run: |
           make test
 
+      - name: Run Checkstyle
+        run: |
+          make checkstyle          
+
       - name: Upload Test Results
         timeout-minutes: 1
         if: failure()

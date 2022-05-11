@@ -321,6 +321,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "chrono"
+version = "0.4.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
+dependencies = [
+ "js-sys",
+ "libc",
+ "num-integer",
+ "num-traits",
+ "time",
+ "wasm-bindgen",
+ "winapi",
+]
+
+[[package]]
 name = "clang-sys"
 version = "1.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -558,8 +573,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio"
-version = "0.12.6"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.12.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "33255695d2f7020fb0a9fa8642ed3bd3eb97c3b789d2ecdbae9d2f84eb3d512c"
 dependencies = [
  "async-channel",
  "async-lock",
@@ -581,7 +597,6 @@ dependencies = [
  "fluvio-spu-schema",
  "fluvio-types",
  "futures-util",
- "instant",
  "once_cell",
  "pin-project-lite",
  "semver",
@@ -596,8 +611,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-compression"
-version = "0.1.0"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b2a11336f28be7bee0841da61f619bb410366c53b427cefe02f77e2d5cce7a7"
 dependencies = [
  "flate2",
  "lz4_flex",
@@ -608,8 +624,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-controlplane-metadata"
-version = "0.14.0"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.15.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8d876315d312d61a7822df10f60363a5ef396b40ea29b8ad4ab7ecfded7122e1"
 dependencies = [
  "async-trait",
  "base64",
@@ -625,17 +642,20 @@ dependencies = [
 
 [[package]]
 name = "fluvio-dataplane-protocol"
-version = "0.10.0"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.11.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1fbea89b47f14d209504903a86788c7013907a69167de56e35caa80e131aef0f"
 dependencies = [
  "bytes",
  "cfg-if",
+ "chrono",
  "content_inspector",
  "crc32c",
  "eyre",
  "fluvio-compression",
  "fluvio-future",
  "fluvio-protocol",
+ "fluvio-types",
  "flv-util",
  "futures-util",
  "once_cell",
@@ -669,7 +689,7 @@ dependencies = [
 
 [[package]]
 name = "fluvio-java"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "bindgen",
  "env_logger",
@@ -681,8 +701,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-protocol"
-version = "0.7.4"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.7.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c875b24392b835610a0e8c620d11e696014bd106f48a9759bbd080bd1f25d4dd"
 dependencies = [
  "bytes",
  "fluvio-future",
@@ -693,8 +714,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-protocol-derive"
-version = "0.4.1"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "37e1b0457e0fd958a6a8f54a508fda58ba169ba667d3fe26367fa50eee4d733b"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -704,8 +726,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-sc-schema"
-version = "0.12.3"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.13.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a9f16db4cf0036c3c5890e3e63c48c460c5a7b59c73440fba6696d4b8bed6e1d"
 dependencies = [
  "fluvio-controlplane-metadata",
  "fluvio-dataplane-protocol",
@@ -720,8 +743,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-socket"
-version = "0.11.4"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.11.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c35259517081cd708d7b13d7afe1728d77f983e78b029924e8bd51ebfe0f219"
 dependencies = [
  "async-channel",
  "async-lock",
@@ -742,8 +766,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-spu-schema"
-version = "0.9.3"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.9.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a300a9e13672016511b71d3046c061fcfae2f66b48d5540decba7965b4975d4c"
 dependencies = [
  "bytes",
  "flate2",
@@ -757,8 +782,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-stream-model"
-version = "0.6.0"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4e421ff1be3b83020a3a97cb7ef8b6f045bca3b1eea2c95f0cea791eeeaaf988"
 dependencies = [
  "async-rwlock",
  "event-listener",
@@ -768,8 +794,9 @@ dependencies = [
 
 [[package]]
 name = "fluvio-types"
-version = "0.3.2"
-source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
+version = "0.3.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "34e8812836b82cdeeee3448cfac91ad6957b25e0e92826cbd1a51a240cfef1a9"
 dependencies = [
  "event-listener",
  "thiserror",
@@ -1153,6 +1180,25 @@ checksum = "a8903e5a29a317527874d0402f867152a3d21c908bb0b933e416c65e301d4c36"
 dependencies = [
  "memchr",
  "minimal-lexical",
+]
+
+[[package]]
+name = "num-integer"
+version = "0.1.45"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "225d3389fb3509a24c93f5c29eb6bde2586b98d9f016636dff58d7c6f7569cd9"
+dependencies = [
+ "autocfg",
+ "num-traits",
+]
+
+[[package]]
+name = "num-traits"
+version = "0.2.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "578ede34cf02f8924ab9447f50c28075b4d3e5b269972345e7e0372b38c6cdcd"
+dependencies = [
+ "autocfg",
 ]
 
 [[package]]
@@ -1604,6 +1650,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "time"
+version = "0.1.43"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ca8a50ef2360fbd1eeb0ecd46795a87a19024eb4b53c5dc916ca1fd95fe62438"
+dependencies = [
+ "libc",
+ "winapi",
+]
+
+[[package]]
 name = "tinyvec"
 version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1916,3 +1972,8 @@ dependencies = [
  "wasm-bindgen-futures",
  "web-sys",
 ]
+
+[[patch.unused]]
+name = "fluvio"
+version = "0.12.6"
+source = "git+http://github.com/infinyon/fluvio#071387f0ba7c7181dd218a23eca848c0a6c814ed"
