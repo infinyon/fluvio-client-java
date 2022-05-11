@@ -35,14 +35,14 @@ jobs:
         run: ./gradlew rust-deploy
 
       - name: "Upload Rust Static lib for ${{matrix.os}} for java - ${{matrix.java}}"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: "${{matrix.os}}-${{matrix.java}}"
           path: ./fluvio/libs/
           retention-days: 5
 
       - name: 'Upload Java src - linux'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: startsWith(matrix.os, 'ubuntu')
         with:
           name: "java-src-${{matrix.java}}"
@@ -73,19 +73,19 @@ jobs:
           distribution: 'temurin'
 
       - name: Download MacOS Lib
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: "macos-latest-${{matrix.java}}"
           path: ./fluvio/libs/
 
       - name: Download Linux Lib
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: "ubuntu-latest-${{matrix.java}}"
           path: ./fluvio/libs/
 
       - name: Download Java src
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: "java-src-${{matrix.java}}"
           path: ./fluvio/src/main/java/com/infinyon/fluvio/
