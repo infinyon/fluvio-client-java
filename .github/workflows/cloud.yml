@@ -53,7 +53,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          make test
+          make test -i
 
       - name: Run examples
         run: |
