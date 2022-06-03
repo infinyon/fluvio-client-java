@@ -65,6 +65,9 @@ test {
 // app/build.gradle
 def rustBasePath = ".."
 
+// Rust compilation targets
+def targets = new ArrayList<String>()
+
 // execute cargo metadata and get path to target directory
 tasks.create(name: "cargo-output-dir", description: "Get cargo metadata") {
     new ByteArrayOutputStream().withStream { os ->
@@ -80,15 +83,75 @@ tasks.create(name: "cargo-output-dir", description: "Get cargo metadata") {
         project.ext.cargo_target_directory = json.target_directory
     }
 }
+
+// get host compilation target
+tasks.create(name: "rustc-target", description: "Get compilation target", dependsOn: "cargo-output-dir") {
+    new ByteArrayOutputStream().withStream { os ->
+            exec {
+                commandLine 'rustc', '-vV'
+                workingDir rustBasePath
+                standardOutput = os
+            }
+            def target_prop = findProperty('compilation_targets');
+            if (target_prop == null || target_prop == "") {
+                os.toString().eachLine {
+                    line -> {
+                        if (line.contains("host: ")) {
+                            targets.add(line.split(" ")[1]);
+                        }
+                    }
+                }
+            } else {
+                for (String part: target_prop.split(",")) {
+                    targets.add(part);
+                }
+            }
+            logger.info("compilation targets: ${targets}")
+        }
+}
+
+// install rustc target
+tasks.create(name: "rustc-install-target", description: "Install compilation target", dependsOn: "rustc-target") {
+    doLast {
+        for (String target: targets) {
+            exec {
+                workingDir rustBasePath
+                commandLine 'rustup', 'target', 'add', target
+            }
+        }
+    }
+}
+
 // Build with cargo
-tasks.create(name: "cargo-build", type: Exec, description: "Running Cargo build", dependsOn: "cargo-output-dir") {
-    workingDir rustBasePath
-    commandLine 'cargo', 'build', '--release'
+tasks.create(name: "cargo-build", description: "Running Cargo build", dependsOn: "rustc-install-target") {
+    doLast {
+        for (String target: targets) {
+            exec {
+                workingDir rustBasePath
+                commandLine 'cargo', 'build', '--release', '--target', target
+            }
+        }
+
+        def args = new ArrayList<String>();
+        def libName = getNativeLibraryName();
+        args.add("lipo");
+        args.add("-create");
+        for (String target : targets) {
+            args.add("${project.ext.cargo_target_directory}/${target}/release/" + libName)
+        }
+        args.add("-output");
+        args.add("${project.ext.cargo_target_directory}/release/" + libName);
+
+        exec {
+            workingDir rustBasePath
+            commandLine args
+        }
+    }
 }
 
 tasks.create(name: "rust-deploy", type: Sync, dependsOn: "cargo-build") {
     from "${project.ext.cargo_target_directory}/release"
-    include "*.dylib","*.so"
+    include getNativeLibraryName()
     into "libs/"
 }
 
@@ -100,7 +163,7 @@ tasks.withType(JavaCompile) {
 // Hook up clean tasks
 tasks.create(name: "clean-rust", type: Delete, description: "Deleting built libs", dependsOn: "cargo-output-dir") {
     delete fileTree("${project.ext.cargo_target_directory}/release") {
-        include "*.dylib","*.so"
+        include getNativeLibraryName()
     }
 }
 clean.dependsOn "clean-rust"
@@ -125,7 +188,18 @@ publishing {
     publications {
         gpr(MavenPublication) {
             from(components.java)
-            artifactId "fluvio-${JavaVersion.current()}"
+            artifactId "fluvio"
         }
     }
+}
+
+import org.gradle.internal.os.OperatingSystem
+static def getNativeLibraryName() {
+    def os = OperatingSystem.current();
+    if (os.isLinux()) {
+        return "libfluvio_java.so";
+    } else if (os.isMacOsX()) {
+        return "libfluvio_java.dylib";
+    }
+    throw new UnsupportedOperationException("unsupported os " + os);
 }

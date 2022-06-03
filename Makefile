@@ -6,7 +6,7 @@ assemble:
 	$(GRADLE) assemble
 
 build:
-	$(GRADLE) build -x test
+	$(GRADLE) build -x test -Pcompilation_targets=$(TARGETS)
 
 test: build
 	FLV_SOCKET_WAIT=1200 $(GRADLE) cleanTest test -i
@@ -25,7 +25,7 @@ checkstyle:
 	$(GRADLE) checkstyleMain
 
 publish-local:
-	$(GRADLE) publishToMavenLocal -x rust-deploy
+	$(GRADLE) publishToMavenLocal -x rust-deploy -Pcompilation_target=$(TARGET)
 
 publish:
 	$(GRADLE) publish -x rust-deploy
