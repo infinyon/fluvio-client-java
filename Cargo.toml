@@ -15,9 +15,9 @@ env_logger = "^0.9"
 bindgen = { version = "0.59.0", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
 [dependencies]
-log = "^0.4.16"
+log = "^0.4.17"
 fluvio = "0.12.11"
-fluvio-future = { version = "0.3.16", features = ["task", "io"] }
+fluvio-future = { version = "0.3.17", features = ["task", "io"] }
 
 [patch.crates-io]
 fluvio = { git = "http://github.com/infinyon/fluvio" }
