@@ -2,13 +2,42 @@ name: Push snapshot to Maven repo
 
 on:
   workflow_dispatch:
-#  push:
-#    branches:
-#      - main
+  push:
+    branches:
+      - main
 
 jobs:
+  build_macos_rust_libs:
+    name: Build native library for MacOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'adopt'
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+      - name: Deploy package
+        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        with:
+          arguments: rust-deploy
+      - name: "Upload Rust Static lib"
+        uses: actions/upload-artifact@v3
+        with:
+          name: "macos-latest-libs"
+          path: ./fluvio/libs/
+          retention-days: 5
+
   do-snapshot-publish:
     name: Push snapshot to Sonatype OSS
+    needs: [build_macos_rust_libs]
     runs-on: ubuntu-latest
     if: github.repository_owner == 'infinyon'
     steps:
@@ -19,6 +48,11 @@ jobs:
         with:
           java-version: 8
           distribution: 'adopt'
+      - name: Download MacOS Lib
+        uses: actions/download-artifact@v3
+        with:
+          name: "macos-latest-libs"
+          path: ./fluvio/libs/
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
       - name: Publish package
