@@ -37,9 +37,6 @@ repositories {
 
 sourceSets {
     main {
-        java {
-            srcDir 'src/main/java'
-        }
         resources {
             srcDir 'libs'
         }
@@ -54,7 +51,6 @@ dependencies {
 }
 
 test {
-    //systemProperty "java.library.path", file("${buildDir}/libs/shared").absolutePath
     dependsOn cleanTest
     useJUnitPlatform()
 }
@@ -104,6 +100,7 @@ clean.dependsOn "clean-rust"
 
 java {
     withJavadocJar()
+    withSourcesJar()
 }
 
 
