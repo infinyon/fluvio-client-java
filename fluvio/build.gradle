@@ -137,14 +137,8 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = 'galibey'
-                        name = 'Alexander Galibey'
-                        email = 'alexander.galibey@infinyon.com'
-                    }
-                    developer {
-                        id = 'simlay'
-                        name = 'Sebastian Imlay'
-                        email = 'sebastian@infinyon.com'
+                        name = 'Fluvio Contributors'
+                        email = 'team@fluvio.io'
                     }
                 }
                 scm {
