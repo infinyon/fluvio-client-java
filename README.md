@@ -24,22 +24,7 @@ project](https://github.com/infinyon/fluvio-client-java/tree/main/examples) and
 our
 [`Simple.java`](https://github.com/infinyon/fluvio-client-java/blob/main/examples/src/main/java/com/fluvio/example/Simple.java).
 
-Make sure your `build.gradle` has the `maven` section below
-```groovy
-repositories {
-    jcenter()
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/infinyon/fluvio-client-java")
-        credentials {
-            username = System.getenv("GITHUB_ACTOR")
-            password = System.getenv("GITHUB_TOKEN")
-
-        }
-    }
-}
-```
-and add `com.infinyon:fluvio-16:0.0.0` as a dependency. The section should look
+Add `com.infinyon:fluvio:+` as a dependency. The section should look
 something like:
 ```groovy
 dependencies {
@@ -49,14 +34,14 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:29.0-jre'
 
-    implementation 'com.infinyon:fluvio-16:0.0.1'
+    implementation 'com.infinyon:fluvio:+'
 }
 ```
+# Supported Platforms
+Currently Fluvio Java client supports the following platforms:
+1. Linux/x86_64
+2. macOS/x86_64
 
-The `artfiactId` is dependent on the version of java. See [our
-packages](https://github.com/orgs/infinyon/packages?repo_name=fluvio-client-java)
-to see the published versions. If there's a version you'd like to be published
-please [open an issue](https://github.com/infinyon/fluvio-client-java/issues).
 
 # Developer Notes
 
@@ -68,10 +53,8 @@ version of java.
 not test the connection to a fluvio cluster. To verify that things work, run
 `make examples`.
 
-* To publish, update the `version` in
-[`fluvio/build.gradle`](https://github.com/infinyon/fluvio-client-java/blob/main/fluvio/build.gradle)
-to your liking and run the [Publish
-CI](https://github.com/infinyon/fluvio-client-java/actions/workflows/publish.yml).
+* To publish, run the [Publish
+CI](https://github.com/infinyon/fluvio-client-java/actions/workflows/do_release.yml).
 
 * The [documentation on github
 pages](https://infinyon.github.io/fluvio-client-java/) is updated on every
