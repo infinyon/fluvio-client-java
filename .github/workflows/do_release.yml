@@ -10,6 +10,12 @@ on:
         description: 'Version to be set after the release (e.g. 0.12.14-SNAPSHOT).'
         required: true
 
+env:
+  GIT_AUTHOR_NAME: Github Actions Release bot
+  GIT_AUTHOR_EMAIL: <>
+  GIT_COMMITTER_NAME: Github Actions Release bot
+  GIT_COMMITTER_EMAIL: <>
+
 jobs:
   build_macos_rust_libs:
     name: Build native library for MacOS
