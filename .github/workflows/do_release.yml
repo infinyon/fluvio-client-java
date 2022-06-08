@@ -83,4 +83,4 @@ jobs:
         run: |
           sed -E -i "s/^version '[A-Z0-9\\.\\-]+'$/version '${{ github.event.inputs.next-snapshot-version }}'/" ./fluvio/build.gradle
           git commit -am "Set next version to ${{ github.event.inputs.next-snapshot-version }}"
-          git push origin v${{ github.event.inputs.release-version }} master
+          git push origin v${{ github.event.inputs.release-version }} main
