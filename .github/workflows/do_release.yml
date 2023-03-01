@@ -52,7 +52,7 @@ jobs:
     if: github.repository_owner == 'infinyon'
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Java and credentials
         uses: actions/setup-java@v3
         with:
