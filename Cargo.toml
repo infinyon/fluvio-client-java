@@ -16,8 +16,6 @@ bindgen = { version = "0.64.0", default-features = false, features = ["logging",
 
 [dependencies]
 log = "^0.4.17"
-fluvio = "0.12.11"
-fluvio-future = { version = "0.4.1", features = ["task", "io"] }
-
-[patch.crates-io]
-fluvio = { git = "http://github.com/infinyon/fluvio" }
+fluvio = { features = ["admin"], git = "https://github.com/infinyon/fluvio.git", rev = "0483f594a7e9e25accd40c8ed56f4064f71476be" }
+fluvio-future = { version = "0.5.1", features = ["task", "io"] }
+anyhow = "1.0.70"
