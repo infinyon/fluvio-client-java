@@ -12,10 +12,8 @@ public class FluvioTest {
     @Test
     public void testFluvioConnect() {
         Exception thrown = assertThrows(Exception.class, Fluvio::connect);
-        assertThat(thrown.getMessage(), anyOf(
-            containsString(
-                "Socket(Io(Os { code: 61, kind: ConnectionRefused, message: \"Connection refused\" }))"),
-            containsString("ClientConfig(NoActiveProfile)")
+        assertThat(thrown.getMessage(), containsString(
+            "Config error: Config has no active profile\n\nCaused by:\n    Config has no active profile"
         ));
     }
 }
