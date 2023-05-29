@@ -1,5 +1,9 @@
 name: Push release to Maven repo
 
+permissions:
+  # contents permission to update benchmark contents in gh-pages branch
+  contents: write
+
 on:
   workflow_dispatch:
     inputs:
@@ -83,4 +87,8 @@ jobs:
         run: |
           sed -E -i "s/^version '[A-Z0-9\\.\\-]+'$/version '${{ github.event.inputs.next-snapshot-version }}'/" ./fluvio/build.gradle
           git commit -am "Set next version to ${{ github.event.inputs.next-snapshot-version }}"
-          git push origin v${{ github.event.inputs.release-version }} main
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
