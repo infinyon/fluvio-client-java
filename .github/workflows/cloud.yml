@@ -1,5 +1,9 @@
 name: Fluvio Cloud CI
 
+concurrency:
+  group: cloud-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
   push:
@@ -8,14 +12,6 @@ on:
     - cron:  '0 14 * * *'
 
 jobs:
-  cancel_previous_runs:
-    name: Cancel Previous Runs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: styfle/cancel-workflow-action@0.10.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-
   smoke_test:
     name: Smoke test
     runs-on: ${{ matrix.os }}

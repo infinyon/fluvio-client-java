@@ -3,7 +3,7 @@ use fluvio::{
     PartitionConsumer,
     TopicProducer,
     FluvioError,
-    dataplane::ErrorCode,
+    dataplane::link::ErrorCode,
     Offset,
     consumer::Record,
 };
@@ -17,6 +17,10 @@ use fluvio_future::{
 use std::pin::Pin;
 use crate::jni_c_header::*;
 
+fn anyhow_error_to_string(e: anyhow::Error) -> String {
+    format!("{:?}", e)
+}
+
 fn fluvio_error_to_string(e: FluvioError) -> String {
     format!("{:?}", e)
 }
@@ -25,20 +29,20 @@ fn fluvio_error_to_string(e: FluvioError) -> String {
 mod _Fluvio {
     use super::*;
     pub fn connect() -> Result<Fluvio, String> {// TODO: Return result type
-        run_block_on(Fluvio::connect()).map_err(fluvio_error_to_string)
+        run_block_on(Fluvio::connect()).map_err(anyhow_error_to_string)
     }
     pub fn partition_consumer(
         fluvio: &Fluvio,
         topic: String,
         partition: i32
     ) -> Result<PartitionConsumer, String> {
-        run_block_on(fluvio.partition_consumer(topic, partition)).map_err(fluvio_error_to_string)
+        run_block_on(fluvio.partition_consumer(topic, partition as u32)).map_err(anyhow_error_to_string)
     }
     pub fn topic_producer(
         fluvio: &Fluvio,
         topic: String,
     ) -> Result<TopicProducer, String> {
-        run_block_on(fluvio.topic_producer(topic)).map_err(fluvio_error_to_string)
+        run_block_on(fluvio.topic_producer(topic)).map_err(anyhow_error_to_string)
     }
 }
 
@@ -173,12 +177,12 @@ mod _TopicProducer {
         key: &[u8],
         value: &[u8],
     ) -> Result<(), String> {
-        run_block_on(producer.send(key, value)).map_err(fluvio_error_to_string).map(|_| ())
+        run_block_on(producer.send(key, value)).map_err(anyhow_error_to_string).map(|_| ())
     }
     pub fn flush(
         producer: &TopicProducer,
     ) -> Result<(), String> {
-        run_block_on(producer.flush()).map_err(fluvio_error_to_string)
+        run_block_on(producer.flush()).map_err(anyhow_error_to_string)
     }
 }
 foreign_class!(

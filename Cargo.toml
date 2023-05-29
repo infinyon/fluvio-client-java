@@ -11,13 +11,11 @@ name = "fluvio_java"
 
 [build-dependencies]
 flapigen = "0.6.0-pre7"
-env_logger = "^0.9"
-bindgen = { version = "0.60.1", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
+env_logger = "^0.10"
+bindgen = { version = "0.64.0", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
 [dependencies]
-log = "^0.4.17"
-fluvio = "0.12.11"
-fluvio-future = { version = "0.4.1", features = ["task", "io"] }
-
-[patch.crates-io]
-fluvio = { git = "http://github.com/infinyon/fluvio" }
+log = "^0.4.18"
+fluvio = { features = ["admin"], git = "https://github.com/infinyon/fluvio.git", tag = "v0.10.10" }
+fluvio-future = { version = "0.5.1", features = ["task", "io"] }
+anyhow = "1.0.70"
