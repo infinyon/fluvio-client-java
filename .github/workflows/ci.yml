@@ -56,3 +56,12 @@ jobs:
         with:
           name: gradle-test-results
           path: /home/runner/work/fluvio-client-java/fluvio-client-java/lib/build/reports/tests/test/
+
+  done:
+    name: Done
+    needs:
+      - smoke_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Done
+        run: echo "Done!"
