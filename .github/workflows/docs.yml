@@ -1,5 +1,9 @@
 name: Docs
 
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
   push:
@@ -7,13 +11,6 @@ on:
     tags:
       - 'v*'
 jobs:
-  cancel_previous_runs:
-    name: Cancel Previous Runs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: styfle/cancel-workflow-action@0.11.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
   docs:
     name: build and push static docs
     runs-on: ${{ matrix.os }}
