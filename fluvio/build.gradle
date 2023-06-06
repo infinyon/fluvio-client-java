@@ -28,7 +28,7 @@ checkstyle {
 }
 
 group 'com.infinyon'
-version '0.12.14-SNAPSHOT'
+version '0.12.15-SNAPSHOT'
 
 repositories {
     // Use JCenter for resolving dependencies.
