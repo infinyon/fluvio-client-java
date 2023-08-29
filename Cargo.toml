@@ -15,7 +15,7 @@ env_logger = "^0.10"
 bindgen = { version = "0.66.1", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
 [dependencies]
-log = "^0.4.19"
+log = "^0.4.20"
 fluvio = { features = ["admin"], git = "https://github.com/infinyon/fluvio.git", tag = "v0.10.12" }
 fluvio-future = { version = "0.5.1", features = ["task", "io"] }
 anyhow = "1.0.75"
