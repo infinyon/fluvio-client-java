@@ -653,7 +653,7 @@ dependencies = [
  "dirs",
  "event-listener",
  "fluvio-compression",
- "fluvio-future",
+ "fluvio-future 0.5.1",
  "fluvio-protocol",
  "fluvio-sc-schema",
  "fluvio-smartmodule",
@@ -699,7 +699,7 @@ dependencies = [
  "bytesize",
  "derive_builder",
  "flate2",
- "fluvio-future",
+ "fluvio-future 0.5.1",
  "fluvio-protocol",
  "fluvio-stream-model",
  "fluvio-types",
@@ -738,6 +738,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "fluvio-future"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "daf01d41a3439ecf3377477c34d5913241c186d03500a0a6793a6c2688815a61"
+dependencies = [
+ "async-io",
+ "async-std",
+ "cfg-if",
+ "fluvio-wasm-timer",
+ "futures-lite",
+ "log",
+ "pin-project",
+ "thiserror",
+ "tracing",
+ "ws_stream_wasm",
+]
+
+[[package]]
 name = "fluvio-java"
 version = "0.10.0"
 dependencies = [
@@ -746,7 +764,7 @@ dependencies = [
  "env_logger",
  "flapigen",
  "fluvio",
- "fluvio-future",
+ "fluvio-future 0.6.0",
  "log",
 ]
 
@@ -760,7 +778,7 @@ dependencies = [
  "crc32c",
  "eyre",
  "fluvio-compression",
- "fluvio-future",
+ "fluvio-future 0.5.1",
  "fluvio-protocol-derive",
  "fluvio-types",
  "flv-util",
@@ -833,7 +851,7 @@ dependencies = [
  "bytes",
  "cfg-if",
  "event-listener",
- "fluvio-future",
+ "fluvio-future 0.5.1",
  "fluvio-protocol",
  "futures-util",
  "once_cell",
@@ -854,7 +872,7 @@ dependencies = [
  "derive_builder",
  "educe",
  "flate2",
- "fluvio-future",
+ "fluvio-future 0.5.1",
  "fluvio-protocol",
  "fluvio-smartmodule",
  "fluvio-types",
