@@ -17,5 +17,5 @@ bindgen = { version = "0.69.1", default-features = false, features = ["logging",
 [dependencies]
 log = "^0.4.20"
 fluvio = { features = ["admin"], git = "https://github.com/infinyon/fluvio.git", tag = "v0.11.0" }
-fluvio-future = { version = "0.6.0", features = ["task", "io"] }
+fluvio-future = { version = "0.6.1", features = ["task", "io"] }
 anyhow = "1.0.75"
