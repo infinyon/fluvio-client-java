@@ -29,7 +29,7 @@ jobs:
         with:
           arguments: rust-deploy
       - name: "Upload Rust Static lib"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "macos-latest-libs"
           path: ./fluvio/libs/
