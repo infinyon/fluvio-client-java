@@ -11,7 +11,7 @@ name = "fluvio_java"
 
 [build-dependencies]
 flapigen = "0.6.0-pre7"
-env_logger = "^0.10"
+env_logger = "^0.11"
 bindgen = { version = "0.69.2", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
 [dependencies]
