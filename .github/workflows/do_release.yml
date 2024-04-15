@@ -37,7 +37,7 @@ jobs:
           java-version: 8
           distribution: 'adopt'
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: Deploy package
         uses: gradle/gradle-build-action@v3
         with:
@@ -73,7 +73,7 @@ jobs:
           git commit -am "Release ${{ github.event.inputs.release-version }} version"
           git tag v${{ github.event.inputs.release-version }}
       - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: Publish package
         uses: gradle/gradle-build-action@v3
         with:
