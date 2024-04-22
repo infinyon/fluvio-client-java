@@ -291,9 +291,9 @@ dependencies = [
 
 [[package]]
 name = "base64"
-version = "0.21.0"
+version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a4a4ddaa51a5bc52a6948f74c06d20aaaddb71924eab79b8c97a8c556e942d6a"
+checksum = "9475866fec1451be56a3c2400fd081ff546538961565ccb5b7142cbd22bc7a51"
 
 [[package]]
 name = "bindgen"
@@ -394,6 +394,12 @@ name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+
+[[package]]
+name = "cfg_aliases"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fd16c4719339c4530435d38e511904438d07cce7950afa3718a84ac36c10e89e"
 
 [[package]]
 name = "chrono"
@@ -720,8 +726,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio"
-version = "0.21.7"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+version = "0.21.8"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "anyhow",
  "async-channel",
@@ -759,7 +765,7 @@ dependencies = [
 [[package]]
 name = "fluvio-compression"
 version = "0.3.2"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "bytes",
  "flate2",
@@ -772,8 +778,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio-controlplane-metadata"
-version = "0.25.1"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+version = "0.27.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -837,8 +843,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio-protocol"
-version = "0.10.10"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+version = "0.10.12"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "bytes",
  "content_inspector",
@@ -859,7 +865,7 @@ dependencies = [
 [[package]]
 name = "fluvio-protocol-derive"
 version = "0.5.4"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -869,8 +875,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio-sc-schema"
-version = "0.21.2"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+version = "0.23.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "anyhow",
  "fluvio-controlplane-metadata",
@@ -888,7 +894,7 @@ dependencies = [
 [[package]]
 name = "fluvio-smartmodule"
 version = "0.7.3"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "eyre",
  "fluvio-protocol",
@@ -900,7 +906,7 @@ dependencies = [
 [[package]]
 name = "fluvio-smartmodule-derive"
 version = "0.6.2"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -910,7 +916,7 @@ dependencies = [
 [[package]]
 name = "fluvio-socket"
 version = "0.14.7"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "async-channel",
  "async-lock",
@@ -934,8 +940,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio-spu-schema"
-version = "0.14.5"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+version = "0.14.6"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "bytes",
  "derive_builder",
@@ -953,7 +959,7 @@ dependencies = [
 [[package]]
 name = "fluvio-stream-model"
 version = "0.11.1"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "async-rwlock",
  "event-listener 3.1.0",
@@ -965,11 +971,13 @@ dependencies = [
 
 [[package]]
 name = "fluvio-types"
-version = "0.4.5"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.5#b500708703b0c8900675af56f4fa03e3ae49664c"
+version = "0.4.6"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.11.6#db1a58d7e468a53235c0cabb388ccfc9249c7419"
 dependencies = [
  "event-listener 3.1.0",
+ "serde",
  "thiserror",
+ "toml",
  "tracing",
 ]
 
@@ -1371,9 +1379,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.148"
+version = "0.2.153"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9cdc71e17332e86d2e1d38c1f99edcb6288ee11b815fb1a4b049eaa2114d369b"
+checksum = "9c198f91728a82281a64e1f4f9eeb25d82cb32a5de251c6bd1b5154d63a8e7bd"
 
 [[package]]
 name = "libloading"
@@ -1442,12 +1450,13 @@ dependencies = [
 
 [[package]]
 name = "nix"
-version = "0.27.1"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2eb04e9c688eff1c89d72b407f168cf79bb9e867a9d3323ed6c01519eb9cc053"
+checksum = "ab2156c4fce2f8df6c499cc1c763e4394b7482525bf2a9701c9d79d215f519e4"
 dependencies = [
  "bitflags 2.3.2",
  "cfg-if",
+ "cfg_aliases",
  "libc",
 ]
 
