@@ -21,7 +21,7 @@ jobs:
         rust: [stable]
         # Add Java 16 when https://github.com/gradle/gradle/issues/13481 has a
         # better work around.
-        java: [8, 11, 16, 17]
+        java: [17, 21]
         exclude:
           - os: macos-latest
             java: 8
@@ -31,10 +31,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install ${{ matrix.rust }}
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
-          override: true
 
       - name: Setup java
         uses: actions/setup-java@v4
@@ -53,7 +52,7 @@ jobs:
 
       - name: Run Checkstyle
         run: |
-          make checkstyle          
+          make checkstyle
 
       - name: Upload Test Results
         timeout-minutes: 1
