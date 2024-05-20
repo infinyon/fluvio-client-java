@@ -22,6 +22,10 @@ jobs:
         # Add Java 16 when https://github.com/gradle/gradle/issues/13481 has a
         # better work around.
         java: [8, 11, 16, 17]
+        exclude:
+          - os: macos-latest
+            java: 8
+
     steps:
       - uses: actions/checkout@v4
       - name: Install ${{ matrix.rust }}
