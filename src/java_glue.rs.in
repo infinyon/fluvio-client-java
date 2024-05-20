@@ -37,6 +37,7 @@ mod _Fluvio {
         topic: String,
         partition: i32
     ) -> Result<PartitionConsumer, String> {
+        #[allow(deprecated)]
         run_block_on(fluvio.partition_consumer(topic, partition as u32)).map_err(anyhow_error_to_string)
     }
     pub fn topic_producer(
