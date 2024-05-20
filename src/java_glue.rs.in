@@ -29,6 +29,7 @@ fn fluvio_error_to_string(e: FluvioError) -> String {
 mod _Fluvio {
     use super::*;
     pub fn connect() -> Result<Fluvio, String> {// TODO: Return result type
+        #[allow(deprecated)]
         run_block_on(Fluvio::connect()).map_err(anyhow_error_to_string)
     }
     pub fn partition_consumer(
@@ -117,6 +118,7 @@ mod _PartitionConsumer {
         consumer: &PartitionConsumer,
         offset: &Offset,
     ) -> Result<PartitionConsumerStream, String> {
+        #[allow(deprecated)]
         Ok(PartitionConsumerStream {
             inner: Box::pin(run_block_on(
                consumer.stream(offset.clone())
