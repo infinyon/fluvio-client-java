@@ -38,7 +38,7 @@ fn main() {
     let out_src = Path::new(&out_dir).join("java_glue.rs");
     let flap_gen =
         flapigen::Generator::new(LanguageConfig::JavaConfig(java_cfg)).rustfmt_bindings(true);
-    flap_gen.expand("java bindings", &in_src, &out_src);
+    flap_gen.expand("java bindings", &in_src, out_src);
     println!("cargo:rerun-if-changed={}", in_src.display());
 }
 
