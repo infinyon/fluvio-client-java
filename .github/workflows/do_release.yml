@@ -26,15 +26,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install stable
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
+      - name: Install stable rust
+        uses: dtolnay/rust-toolchain@master
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          java-version: 8
+          java-version: 21
           distribution: 'adopt'
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v3
@@ -60,7 +58,7 @@ jobs:
       - name: Set up Java and credentials
         uses: actions/setup-java@v4
         with:
-          java-version: 8
+          java-version: 21
           distribution: 'adopt'
       - name: Download MacOS Lib
         uses: actions/download-artifact@v4
