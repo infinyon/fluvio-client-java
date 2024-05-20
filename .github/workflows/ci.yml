@@ -25,6 +25,8 @@ jobs:
         exclude:
           - os: macos-latest
             java: 8
+          - os: macos-latest
+            java: 16
 
     steps:
       - uses: actions/checkout@v4
