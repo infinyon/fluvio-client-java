@@ -1,7 +1,7 @@
 use fluvio::{
     Fluvio,
     PartitionConsumer,
-    TopicProducer,
+    TopicProducerPool,
     FluvioError,
     dataplane::link::ErrorCode,
     Offset,
@@ -41,7 +41,7 @@ mod _Fluvio {
     pub fn topic_producer(
         fluvio: &Fluvio,
         topic: String,
-    ) -> Result<TopicProducer, String> {
+    ) -> Result<TopicProducerPool, String> {
         run_block_on(fluvio.topic_producer(topic)).map_err(anyhow_error_to_string)
     }
 }
@@ -94,7 +94,7 @@ foreign_class!(
         fn _Fluvio::topic_producer(
             &self,
             topic: String
-        ) -> Result<TopicProducer, String>;  alias producer;
+        ) -> Result<TopicProducerPool, String>;  alias producer;
 
         // https://github.com/Dushistov/flapigen-rs/issues/253#issuecomment-515672499
         foreign_code r#"
@@ -173,14 +173,14 @@ foreign_class!(class FluvioError {
 mod _TopicProducer {
     use super::*;
     pub fn send(
-        producer: &TopicProducer,
+        producer: &TopicProducerPool,
         key: &[u8],
         value: &[u8],
     ) -> Result<(), String> {
         run_block_on(producer.send(key, value)).map_err(anyhow_error_to_string).map(|_| ())
     }
     pub fn flush(
-        producer: &TopicProducer,
+        producer: &TopicProducerPool,
     ) -> Result<(), String> {
         run_block_on(producer.flush()).map_err(anyhow_error_to_string)
     }
@@ -188,7 +188,7 @@ mod _TopicProducer {
 foreign_class!(
     /// <p>Sends records to a particular topic.</p>
     class TopicProducer {
-        self_type TopicProducer;
+        self_type TopicProducerPool;
         private constructor = empty;
 
         /// Send a key/value record to this topic.
