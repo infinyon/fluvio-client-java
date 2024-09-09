@@ -12,10 +12,10 @@ name = "fluvio_java"
 [build-dependencies]
 flapigen = "0.6.1"
 env_logger = "^0.11"
-bindgen = { version = "0.70.0", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
+bindgen = { version = "0.70.1", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
 [dependencies]
 log = "^0.4.22"
 fluvio = { features = ["admin"], git = "https://github.com/infinyon/fluvio.git", tag = "v0.11.11" }
 fluvio-future = { version = "0.7.0", features = ["task", "io"] }
-anyhow = "1.0.86"
+anyhow = "1.0.87"
