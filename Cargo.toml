@@ -10,7 +10,7 @@ crate-type = ["cdylib"]
 name = "fluvio_java"
 
 [build-dependencies]
-flapigen = "0.7.0"
+flapigen = "0.8.0"
 env_logger = "^0.11"
 bindgen = { version = "0.70.1", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
