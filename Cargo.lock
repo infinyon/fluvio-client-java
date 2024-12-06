@@ -85,9 +85,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.92"
+version = "1.0.94"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "74f37166d7d48a0284b99dd824694c26119c700b53bf0d1540cdb147dbdaaf13"
+checksum = "c1fd03a028ef38ba2276dce7e33fcd6369c158a1bca17946c4b1b701891c1ff7"
 
 [[package]]
 name = "async-channel"
@@ -258,7 +258,7 @@ checksum = "6e0c28dcc82d7c8ead5cb13beb15405b57b8546e93215673ff8ca0349a028107"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -321,7 +321,7 @@ dependencies = [
  "regex",
  "rustc-hash",
  "shlex",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -349,6 +349,15 @@ dependencies = [
  "fastrand 1.9.0",
  "futures-lite 1.13.0",
  "log",
+]
+
+[[package]]
+name = "borsh"
+version = "1.5.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f5327f6c99920069d1fe374aa743be1af0031dea9f250852cdf1ae6a0861ee24"
+dependencies = [
+ "cfg_aliases",
 ]
 
 [[package]]
@@ -511,7 +520,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "strsim",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -522,7 +531,7 @@ checksum = "d336a2a514f6ccccaa3e09b02d41d35330c07ddf03a62165fcec10bb561c7806"
 dependencies = [
  "darling_core",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -543,7 +552,7 @@ dependencies = [
  "darling",
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -553,7 +562,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "206868b8242f27cecce124c19fd88157fbd0dd334df2587f36417bafbc85097b"
 dependencies = [
  "derive_builder_core",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -586,7 +595,7 @@ dependencies = [
  "enum-ordinalize",
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -612,7 +621,7 @@ checksum = "0d28318a75d4aead5c4db25382e8ef717932d0346600cacae6357eb5941bc5ff"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -714,13 +723,12 @@ checksum = "0ce7134b9999ecaf8bcd65542e436736ef32ddca1b3e06094cb6ec5755203b80"
 
 [[package]]
 name = "flapigen"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f9a61fef978d1d8cfafd820a898f42319ba0a8b5edbe892a2f3c455419e8f54a"
+checksum = "c7cec3e9eb2b8b9da20b3fed61b620e9cf5c54812caa2e5d47c015d5f5941eb3"
 dependencies = [
  "bitflags 2.6.0",
  "heck",
- "lazy_static",
  "log",
  "petgraph",
  "proc-macro2",
@@ -729,7 +737,7 @@ dependencies = [
  "smallvec",
  "smol_str",
  "strum",
- "syn 1.0.109",
+ "syn 2.0.87",
  "which",
 ]
 
@@ -745,8 +753,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio"
-version = "0.23.4"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+version = "0.24.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "anyhow",
  "async-channel",
@@ -781,7 +789,7 @@ dependencies = [
 [[package]]
 name = "fluvio-compression"
 version = "0.3.4"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "bytes",
  "flate2",
@@ -795,13 +803,14 @@ dependencies = [
 
 [[package]]
 name = "fluvio-controlplane-metadata"
-version = "0.29.1"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+version = "0.30.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "anyhow",
  "base64",
  "bytes",
  "bytesize",
+ "cfg-if",
  "derive_builder",
  "flate2",
  "fluvio-protocol",
@@ -857,8 +866,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio-protocol"
-version = "0.11.0"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+version = "0.12.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "bytes",
  "cfg-if",
@@ -880,7 +889,7 @@ dependencies = [
 [[package]]
 name = "fluvio-protocol-derive"
 version = "0.5.4"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -890,8 +899,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio-sc-schema"
-version = "0.24.3"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+version = "0.25.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "anyhow",
  "fluvio-controlplane-metadata",
@@ -907,8 +916,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio-smartmodule"
-version = "0.7.5"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+version = "0.8.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "eyre",
  "fluvio-protocol",
@@ -920,17 +929,17 @@ dependencies = [
 [[package]]
 name = "fluvio-smartmodule-derive"
 version = "0.6.4"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
 name = "fluvio-socket"
-version = "0.14.11"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+version = "0.15.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "async-channel",
  "async-lock 3.4.0",
@@ -954,8 +963,8 @@ dependencies = [
 
 [[package]]
 name = "fluvio-spu-schema"
-version = "0.16.1"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+version = "0.17.0"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "bytes",
  "derive_builder",
@@ -973,7 +982,7 @@ dependencies = [
 [[package]]
 name = "fluvio-stream-dispatcher"
 version = "0.13.6"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "anyhow",
  "async-channel",
@@ -996,7 +1005,7 @@ dependencies = [
 [[package]]
 name = "fluvio-stream-model"
 version = "0.11.4"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "async-lock 3.4.0",
  "event-listener 5.3.1",
@@ -1009,7 +1018,7 @@ dependencies = [
 [[package]]
 name = "fluvio-types"
 version = "0.5.2"
-source = "git+https://github.com/infinyon/fluvio.git?tag=v0.12.1#322c5dbd5451f2af9142781f1930776ea3696e3f"
+source = "git+https://github.com/infinyon/fluvio.git?tag=v0.13.0#8bf23799f26f5c04712198f2f9660dd34588968b"
 dependencies = [
  "event-listener 5.3.1",
  "serde",
@@ -1148,7 +1157,7 @@ checksum = "87750cf4b7a4c0625b1529e4c543c2182106e4dedc60a2a6455e00d212c489ac"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -1230,9 +1239,9 @@ checksum = "2c6201b9ff9fd90a5a3bac2e56a830d0caa509576f0e503818ee82c181b3437a"
 
 [[package]]
 name = "heck"
-version = "0.4.1"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
+checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
 
 [[package]]
 name = "hermit-abi"
@@ -1391,12 +1400,6 @@ checksum = "0de8b303297635ad57c9f5059fd9cee7a47f8e8daa09df0fcd07dd39fb22977f"
 dependencies = [
  "log",
 ]
-
-[[package]]
-name = "lazy_static"
-version = "1.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "lenient_semver"
@@ -1583,7 +1586,7 @@ checksum = "a948666b637a0f465e8564c73e89d4dde00d72d4d473cc972f390fc3dcee7d9c"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -1711,7 +1714,7 @@ checksum = "39407670928234ebc5e6e580247dd567ad73a3578460c5990f9503df207e8f07"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -1774,9 +1777,9 @@ dependencies = [
 
 [[package]]
 name = "quote"
-version = "1.0.36"
+version = "1.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0fa76aaf39101c457836aec0ce2316dbdc3ab723cdda1c6bd4e6ad4208acaca7"
+checksum = "b5b9d34b8991d19d98081b46eacdd8eb58c6f2b201139f7c5f643cc155a633af"
 dependencies = [
  "proc-macro2",
 ]
@@ -1925,7 +1928,7 @@ checksum = "8c805777e3930c8883389c602315a24224bcc738b63905ef87cd1420353ea93e"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -2009,10 +2012,11 @@ checksum = "a507befe795404456341dfab10cef66ead4c041f62b8b11bbb92bffe5d0953e0"
 
 [[package]]
 name = "smol_str"
-version = "0.2.0"
+version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "74212e6bbe9a4352329b2f68ba3130c15a3f26fe88ff22dbdc6cdd58fa85e99c"
+checksum = "9676b89cd56310a87b93dec47b11af744f34d5fc9f367b829474eec0a891350d"
 dependencies = [
+ "borsh",
  "serde",
 ]
 
@@ -2056,24 +2060,24 @@ checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
 
 [[package]]
 name = "strum"
-version = "0.24.1"
+version = "0.26.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "063e6045c0e62079840579a7e47a355ae92f60eb74daaf156fb1e84ba164e63f"
+checksum = "8fec0f0aef304996cf250b31b5a10dee7980c85da9d759361292b8bca5a18f06"
 dependencies = [
  "strum_macros",
 ]
 
 [[package]]
 name = "strum_macros"
-version = "0.24.3"
+version = "0.26.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e385be0d24f186b4ce2f9982191e7101bb737312ad61c1f2f984f34bcf85d59"
+checksum = "4c6bee85a5a24955dc440386795aa378cd9cf82acd5f764469152d2270e581be"
 dependencies = [
  "heck",
  "proc-macro2",
  "quote",
  "rustversion",
- "syn 1.0.109",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -2089,9 +2093,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.72"
+version = "2.0.87"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc4b9b9bf2add8093d3f2c0204471e951b2285580335de42f9d2534f3ae7a8af"
+checksum = "25aa4ce346d03a6dcd68dd8b4010bcb74e54e62c90c573f394c46eae99aba32d"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2127,7 +2131,7 @@ checksum = "f9456a42c5b0d803c8cd86e73dd7cc9edd429499f37a3550d286d5e86720569f"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -2149,7 +2153,7 @@ checksum = "5b8a1e28f2deaa14e508979454cb3a223b10b938b45af148bc0986de36f1923b"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -2221,7 +2225,7 @@ checksum = "34704c8d6ebcbc939824180af020566b01a7c01f80641264eba0999f6c2b6be7"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
 ]
 
 [[package]]
@@ -2306,7 +2310,7 @@ dependencies = [
  "once_cell",
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
  "wasm-bindgen-shared",
 ]
 
@@ -2340,7 +2344,7 @@ checksum = "4783ce29f09b9d93134d41297aded3a712b7b979e9c6f28c32cb88c973a94869"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.72",
+ "syn 2.0.87",
  "wasm-bindgen-backend",
  "wasm-bindgen-shared",
 ]

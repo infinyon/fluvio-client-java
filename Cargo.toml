@@ -10,12 +10,12 @@ crate-type = ["cdylib"]
 name = "fluvio_java"
 
 [build-dependencies]
-flapigen = "0.7.0"
+flapigen = "0.8.0"
 env_logger = "^0.11"
 bindgen = { version = "0.70.1", default-features = false, features = ["logging", "runtime", "which-rustfmt"] }
 
 [dependencies]
 log = "^0.4.22"
-fluvio = { features = ["admin"], git = "https://github.com/infinyon/fluvio.git", tag = "v0.12.1" }
+fluvio = { features = ["admin"], git = "https://github.com/infinyon/fluvio.git", tag = "v0.13.0" }
 fluvio-future = { version = "0.7.0", features = ["task", "io"] }
-anyhow = "1.0.92"
+anyhow = "1.0.94"
